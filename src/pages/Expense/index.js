@@ -6,9 +6,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {Container, Text} from './styles';
 
-export default class Main extends Component {
+export default class Expense extends Component {
   static navigationOptions = {
-    title: 'Main',
+    title: 'Despesas',
   };
 
   render() {

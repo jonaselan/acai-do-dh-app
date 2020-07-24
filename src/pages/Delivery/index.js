@@ -4,9 +4,9 @@ import React, {Component} from 'react';
 
 import {Container, Text} from './styles';
 
-export default class User extends Component {
+export default class Delivery extends Component {
   static navigationOptions = {
-    title: 'User',
+    title: 'Entregadores',
   };
 
   render() {
