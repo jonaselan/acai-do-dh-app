@@ -1,17 +1,25 @@
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Sale from './pages/Sale';
+import NewSale from './pages/Sale/New';
+
 import Delivery from './pages/Delivery';
 import Expense from './pages/Expense';
 import Statistic from './pages/Statistic';
 
+const SaleStack = createStackNavigator({
+  Sale: Sale,
+  NewSale: NewSale,
+});
+
 const Routes = createAppContainer(
   createBottomTabNavigator(
     {
-      Sale,
+      Sale: SaleStack,
       Delivery,
       Expense,
       Statistic,
