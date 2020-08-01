@@ -14,11 +14,13 @@ export const Form = styled.View`
   border-bottom-width: 1px;
 `;
 
+export const DeliveryMethodView = styled.View``;
+
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#999',
 })`
   margin-bottom: 10px;
-  height: 40px;
+  height: 50px;
   background: #eee;
   border-radius: 4px;
   padding: 0 15px;
