@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 // import {Keyboard, ActivityIndicator} from 'react-native';
 // import AsyncStore from '@react-native-community/async-storage';
 // import api from '../../services/api';
@@ -6,24 +6,22 @@ import React, {Component} from 'react';
 
 import {Container, Button, ButtonText} from './styles';
 
-export default class Sale extends Component {
-  static navigationOptions = {
-    title: 'Vendas',
-  };
-
-  handleNavigate = () => {
-    const {navigation} = this.props;
+export default function Sale({navigation}) {
+  function handleNavigate() {
+    // const {navigation} = this.props;
 
     navigation.navigate('NewSale');
-  };
-
-  render() {
-    return (
-      <Container>
-        <Button onPress={() => this.handleNavigate()}>
-          <ButtonText> Adicionar venda </ButtonText>
-        </Button>
-      </Container>
-    );
   }
+
+  return (
+    <Container>
+      <Button onPress={() => handleNavigate()}>
+        <ButtonText> Adicionar venda </ButtonText>
+      </Button>
+    </Container>
+  );
 }
+
+Sale.navigationOptions = {
+  title: 'Vendas',
+};

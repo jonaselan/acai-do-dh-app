@@ -44,3 +44,10 @@ export const SubmitButtonText = styled.Text`
   color: #fff;
   text-transform: uppercase;
 `;
+
+export const LabelInput = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: #24292e;
+  padding: 8px 0;
+`;
