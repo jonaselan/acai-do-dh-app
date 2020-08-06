@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
-// import api from '../../services/api';
+import api from '../../../services/api';
 
 import {
   Container,
@@ -17,12 +17,15 @@ import {
 
 export default function NewSale() {
   const [loading, setLoading] = useState(false);
+  const [charge, setCharge] = useState('');
+  const [value, setValue] = useState('');
+  const [deliveryFee, setDeliveryFee] = useState('');
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [deliveryMethod, setDeliveryMethod] = useState(0);
-  const [deliverymen, setDeliverymen] = useState([]);
-  const [body, setBody] = useState([]);
+  const [deliveryman, setDeliveryman] = useState('');
 
-  // TODO: carregar entregadores
+  const [deliverymen, setDeliverymen] = useState(null);
+
   // TODO: ao clicar fora do texto, dismiss teclado
 
   const payment_methods = [
@@ -34,7 +37,29 @@ export default function NewSale() {
     {label: 'Tirar no local', value: 1},
   ];
 
-  function handleSubmit() {}
+  useEffect(() => {
+    loadDeliverymen();
+  }, []);
+
+  async function loadDeliverymen() {
+    const response = await api.get('deliverymen');
+
+    setDeliverymen(response.data);
+  }
+
+  async function handleSubmit() {
+    setLoading(true);
+    await api.post('sales', {
+      payment_method: paymentMethod,
+      delivery_method: deliveryMethod,
+      delivery_fee: deliveryFee,
+      deliveryman_id: deliveryman,
+      value: value,
+      charge: charge,
+    });
+
+    setLoading(false);
+  }
 
   return (
     <Container>
@@ -57,6 +82,8 @@ export default function NewSale() {
           placeholder="Valor"
           keyboardType="numeric"
           returnKeyType="next"
+          value={value}
+          onChangeText={setValue}
         />
 
         <LabelInput>Troco</LabelInput>
@@ -67,6 +94,8 @@ export default function NewSale() {
           placeholder="Troco"
           keyboardType="numeric"
           returnKeyType="next"
+          value={charge || '0'}
+          onChangeText={setCharge}
         />
 
         <LabelInput>Forma de entrega</LabelInput>
@@ -86,24 +115,35 @@ export default function NewSale() {
         ) : (
           <DeliveryMethodView>
             <LabelInput>Entregador</LabelInput>
-            <Picker
-              selectedValue={'Java'}
-              style={{height: 50, width: 200}}
-              onValueChange={(itemValue, itemIndex) =>
-                setDeliverymen(itemValue)
-              }>
-              <Picker.Item label="Java" value="java" />
-              <Picker.Item label="JavaScript" value="js" />
-            </Picker>
+            {deliverymen ? (
+              <Picker
+                style={{height: 50, width: 300}}
+                onValueChange={(itemValue, itemIndex) =>
+                  setDeliveryman(itemValue)
+                }>
+                {deliverymen.map((deliverym, i) => {
+                  return (
+                    <Picker.Item
+                      key={i}
+                      label={deliverym.name}
+                      value={deliverym.id}
+                    />
+                  );
+                })}
+              </Picker>
+            ) : (
+              <ActivityIndicator color="#000" />
+            )}
 
             <LabelInput>Taxa de entrega</LabelInput>
             <Input
               autoCorrect={false}
               autoCapitalize="none"
-              defaultValue="3"
               keyboardType="numeric"
               placeholder="Valor da entrega"
               returnKeyType="send"
+              value={deliveryFee || '3'}
+              onChangeText={setDeliveryFee}
             />
           </DeliveryMethodView>
         )}
@@ -121,3 +161,7 @@ export default function NewSale() {
     </Container>
   );
 }
+
+NewSale.navigationOptions = {
+  title: 'Cadastra venda',
+};
