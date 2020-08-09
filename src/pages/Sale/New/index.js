@@ -17,16 +17,17 @@ import {
 
 export default function NewSale() {
   const [loading, setLoading] = useState(false);
-  const [charge, setCharge] = useState('');
+  const [charge, setCharge] = useState('0');
   const [value, setValue] = useState('');
-  const [deliveryFee, setDeliveryFee] = useState('');
-  const [paymentMethod, setPaymentMethod] = useState(null);
+  const [deliveryFee, setDeliveryFee] = useState('3');
+  const [paymentMethod, setPaymentMethod] = useState(0);
   const [deliveryMethod, setDeliveryMethod] = useState(0);
   const [deliveryman, setDeliveryman] = useState('');
 
   const [deliverymen, setDeliverymen] = useState(null);
 
   // TODO: ao clicar fora do texto, dismiss teclado
+  // TODO: Validar campo de valor da venda
 
   const payment_methods = [
     {label: 'Dinheiro', value: 0},
@@ -50,12 +51,12 @@ export default function NewSale() {
   async function handleSubmit() {
     setLoading(true);
     await api.post('sales', {
-      payment_method: paymentMethod,
-      delivery_method: deliveryMethod,
-      delivery_fee: deliveryFee,
-      deliveryman_id: deliveryman,
       value: value,
+      payment_method: paymentMethod ? 'credit_card' : 'cash',
+      delivery_method: deliveryMethod ? 'in_store' : 'delivery',
       charge: charge,
+      delivery_fee: deliveryMethod ? 0 : deliveryFee,
+      deliveryman_id: deliveryMethod ? null : deliveryman,
     });
 
     setLoading(false);
@@ -94,7 +95,7 @@ export default function NewSale() {
           placeholder="Troco"
           keyboardType="numeric"
           returnKeyType="next"
-          value={charge || '0'}
+          value={charge}
           onChangeText={setCharge}
         />
 
@@ -142,7 +143,7 @@ export default function NewSale() {
               keyboardType="numeric"
               placeholder="Valor da entrega"
               returnKeyType="send"
-              value={deliveryFee || '3'}
+              value={deliveryFee}
               onChangeText={setDeliveryFee}
             />
           </DeliveryMethodView>
