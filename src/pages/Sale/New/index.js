@@ -154,7 +154,7 @@ export default function NewSale() {
         {loading ? (
           <ActivityIndicator color="#FFF" />
         ) : (
-          <Icon name="add" size={20} color="#FFF">
+          <Icon name="add" size={11} color="#FFF">
             <SubmitButtonText>Criar</SubmitButtonText>
           </Icon>
         )}

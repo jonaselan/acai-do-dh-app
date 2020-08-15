@@ -11,15 +11,23 @@ import Delivery from './pages/Delivery';
 import Expense from './pages/Expense';
 import Statistic from './pages/Statistic';
 
-const SaleStack = createStackNavigator({
-  Sale: Sale,
-  NewSale: NewSale,
-});
-
 const Routes = createAppContainer(
   createBottomTabNavigator(
     {
-      Sale: SaleStack,
+      Sale: {
+        screen: createStackNavigator(
+          {
+            Sale: Sale,
+            NewSale: NewSale,
+          },
+          {
+            navigationOptions: {
+              tabBarLabel: 'Vendas',
+            },
+          },
+        ),
+      },
+      // SaleStack,
       Delivery,
       Expense,
       Statistic,

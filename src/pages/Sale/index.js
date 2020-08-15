@@ -16,11 +16,14 @@ import {
   Value,
   PaymentMethod,
   DeliveryMethod,
+  Charge,
 } from './styles';
 
 export default function Sale({navigation}) {
   const [loading, setLoading] = useState(false);
   const [sales, setSales] = useState([]);
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(8);
 
   function handleNavigate() {
     navigation.navigate('NewSale');
@@ -38,6 +41,17 @@ export default function Sale({navigation}) {
     setLoading(false);
   }
 
+  async function loadMoreSales() {
+    const newPage = page + 1;
+
+    const response = await api.get(`sales?page=${newPage}&per_page=${perPage}`);
+
+    if (response.data.length > 0) {
+      setPage(newPage);
+      setSales([...sales, ...response.data]);
+    }
+  }
+
   return (
     <Container>
       <Button onPress={() => handleNavigate()}>
@@ -47,6 +61,8 @@ export default function Sale({navigation}) {
         <ActivityIndicator color="#000" />
       ) : (
         <SaleList
+          onEndReachedThreshold={0.2}
+          onEndReached={loadMoreSales}
           data={sales}
           keyExtractor={(sale) => sale.id}
           renderItem={({item}) => (
@@ -59,27 +75,31 @@ export default function Sale({navigation}) {
               <Right>
                 {item.delivery_method == 'delivery' ? (
                   <DeliveryMethod>
-                    <Icon name="home" size={15} color="#333" />
+                    <Icon name="home" size={14} color="#333" />
                     Entrega em casa
                   </DeliveryMethod>
                 ) : (
                   <DeliveryMethod>
-                    <Icon name="shop" size={15} color="#333" />
+                    <Icon name="shop" size={14} color="#333" />
                     Retirada no local
                   </DeliveryMethod>
                 )}
 
                 {item.payment_method == 'cash' ? (
                   <PaymentMethod>
-                    <Icon name="attach-money" size={15} color="#333" />
+                    <Icon name="attach-money" size={14} color="#333" />
                     Dinheiro
                   </PaymentMethod>
                 ) : (
                   <PaymentMethod>
-                    <Icon name="credit-card" size={15} color="#333" />
+                    <Icon name="credit-card" size={14} color="#333" />
                     Cartão de Crédito
                   </PaymentMethod>
                 )}
+                <Charge>
+                  <Icon name="arrow-back" size={14} color="#333" />
+                  {item.charge}
+                </Charge>
               </Right>
             </Card>
           )}
