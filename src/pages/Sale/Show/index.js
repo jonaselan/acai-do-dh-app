@@ -1,8 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Alert} from 'react-native';
 import api from '../../../services/api';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import {Container, SaleInfos, Label, Info, DeliveryMethodView} from './styles';
+import {
+  Container,
+  SaleInfos,
+  Label,
+  Info,
+  DeliveryMethodView,
+  Actions,
+  ActionButton,
+  ActionButtonText,
+} from './styles';
 
 export default function ShowSale({navigation}) {
   const sale = navigation.getParam('sale');
@@ -18,6 +28,31 @@ export default function ShowSale({navigation}) {
     setData(response.data);
   }
 
+  function navigateEdit() {
+    navigation.navigate('EditSale', {sale: data});
+  }
+
+  async function handleDelete() {
+    await api.delete(`sales/${sale.id}`);
+
+    navigation.navigate('Sale');
+  }
+
+  const dialogDelete = () =>
+    Alert.alert(
+      'Tem certeza?',
+      'Essa ação não poderá ser desfeita',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => handleDelete()},
+        ,
+      ],
+      {cancelable: false},
+    );
+
   return (
     <Container>
       {data ? (
@@ -27,7 +62,7 @@ export default function ShowSale({navigation}) {
           </Label>
 
           <Label>
-            Forma de pagamento:{' '}
+            Forma de pagamento:
             <Info>
               {data.payment_method == 'cash'
                 ? ' Dinheiro'
@@ -44,7 +79,7 @@ export default function ShowSale({navigation}) {
             <Info>
               {data.delivery_method == 'delivery'
                 ? ' Entrega em casa'
-                : ' Retirada na Loja'}
+                : ' Retirada no local'}
             </Info>
           </Label>
 
@@ -65,6 +100,19 @@ export default function ShowSale({navigation}) {
       ) : (
         <ActivityIndicator color="#000" />
       )}
+
+      <Actions>
+        <ActionButton onPress={() => dialogDelete()}>
+          <Icon name="delete" size={11} color="#FFF">
+            <ActionButtonText> Apagar </ActionButtonText>
+          </Icon>
+        </ActionButton>
+        <ActionButton onPress={() => navigateEdit()}>
+          <Icon name="edit" size={11} color="#FFF">
+            <ActionButtonText> Editar </ActionButtonText>
+          </Icon>
+        </ActionButton>
+      </Actions>
     </Container>
   );
 }

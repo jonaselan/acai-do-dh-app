@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, ScrollView} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
@@ -15,19 +15,20 @@ import {
   LabelInput,
 } from './styles';
 
-export default function NewSale({navigation}) {
+export default function EditSale({navigation}) {
+  const sale = navigation.getParam('sale');
   const [loading, setLoading] = useState(false);
-  const [charge, setCharge] = useState('0');
-  const [value, setValue] = useState('');
-  const [deliveryFee, setDeliveryFee] = useState('3');
-  const [paymentMethod, setPaymentMethod] = useState(0);
-  const [deliveryMethod, setDeliveryMethod] = useState(0);
-  const [deliveryman, setDeliveryman] = useState('');
-
+  const [charge, setCharge] = useState(sale.charge);
+  const [value, setValue] = useState(sale.value);
+  const [deliveryFee, setDeliveryFee] = useState(sale.delivery_fee);
+  const [deliveryman, setDeliveryman] = useState(sale.deliveryman_id);
+  const [paymentMethod, setPaymentMethod] = useState(
+    sale.payment_method == 'cash' ? 0 : 1,
+  );
+  const [deliveryMethod, setDeliveryMethod] = useState(
+    sale.delivery_method == 'delivery' ? 0 : 1,
+  );
   const [deliverymen, setDeliverymen] = useState(null);
-
-  // TODO: ao clicar fora do texto, dismiss teclado
-  // TODO: Validar campo de valor da venda
 
   const payment_methods = [
     {label: 'Dinheiro', value: 0},
@@ -50,7 +51,7 @@ export default function NewSale({navigation}) {
 
   async function handleSubmit() {
     setLoading(true);
-    await api.post('sales', {
+    await api.patch(`sales/${sale.id}`, {
       value: value,
       payment_method: paymentMethod ? 'credit_card' : 'cash',
       delivery_method: deliveryMethod ? 'in_store' : 'delivery',
@@ -70,6 +71,7 @@ export default function NewSale({navigation}) {
         <LabelInput>Forma de pagamento</LabelInput>
         <RadioForm
           radio_props={payment_methods}
+          initial={paymentMethod}
           formHorizontal={true}
           buttonColor={'#7159c1'}
           animation={true}
@@ -113,13 +115,14 @@ export default function NewSale({navigation}) {
           }}
         />
 
-        {deliveryMethod ? (
+        {sale.delivery_method == 'in_store' ? (
           <DeliveryMethodView />
         ) : (
           <DeliveryMethodView>
             <LabelInput>Entregador</LabelInput>
             {deliverymen ? (
               <Picker
+                selectedValue={sale.deliveryman_id}
                 style={{height: 50, width: 300}}
                 onValueChange={(itemValue) => setDeliveryman(itemValue)}>
                 {deliverymen.map((deliverym, i) => {
@@ -135,6 +138,7 @@ export default function NewSale({navigation}) {
             ) : (
               <ActivityIndicator color="#000" />
             )}
+
             <LabelInput>Taxa de entrega</LabelInput>
             <Input
               autoCorrect={false}
@@ -154,7 +158,7 @@ export default function NewSale({navigation}) {
           <ActivityIndicator color="#FFF" />
         ) : (
           <Icon name="add" size={11} color="#FFF">
-            <SubmitButtonText>Criar</SubmitButtonText>
+            <SubmitButtonText>Editar</SubmitButtonText>
           </Icon>
         )}
       </SubmitButton>
@@ -162,6 +166,6 @@ export default function NewSale({navigation}) {
   );
 }
 
-NewSale.navigationOptions = {
-  title: 'Cadastra venda',
+EditSale.navigationOptions = {
+  title: 'Editar venda',
 };
