@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Pressable} from 'react-native';
 // import AsyncStore from '@react-native-community/async-storage';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -20,6 +20,8 @@ import {
   Charge,
 } from './styles';
 
+// TODO: Ao entrar na tela, sempre fazer a requisição novamente para sempre pegar os valores mais recentes
+// TODO: Talvez adc um pull to refresh
 export default function Sale({navigation}) {
   const [loading, setLoading] = useState(false);
   const [sales, setSales] = useState([]);
@@ -53,6 +55,10 @@ export default function Sale({navigation}) {
     }
   }
 
+  function showSale(sale) {
+    navigation.navigate('ShowSale', {sale});
+  }
+
   return (
     <Container>
       <Button onPress={() => handleNavigate()}>
@@ -67,44 +73,46 @@ export default function Sale({navigation}) {
           data={sales}
           keyExtractor={(sale) => sale.id}
           renderItem={({item}) => (
-            <Card>
-              <Left>
-                <Value>R$ {item.value}</Value>
-                <CreatedAt>
-                  {moment(item.created_at).format('DD/MM/YYYY hh:mm:ss')}
-                </CreatedAt>
-              </Left>
+            <Pressable onPress={() => showSale(item)}>
+              <Card>
+                <Left>
+                  <Value>R$ {item.value}</Value>
+                  <CreatedAt>
+                    {moment(item.created_at).format('DD/MM/YYYY hh:mm:ss')}
+                  </CreatedAt>
+                </Left>
 
-              <Right>
-                {item.delivery_method == 'delivery' ? (
-                  <DeliveryMethod>
-                    <Icon name="home" size={14} color="#333" />
-                    Entrega em casa
-                  </DeliveryMethod>
-                ) : (
-                  <DeliveryMethod>
-                    <Icon name="shop" size={14} color="#333" />
-                    Retirada no local
-                  </DeliveryMethod>
-                )}
+                <Right>
+                  {item.delivery_method == 'delivery' ? (
+                    <DeliveryMethod>
+                      <Icon name="home" size={14} color="#333" />
+                      Entrega em casa
+                    </DeliveryMethod>
+                  ) : (
+                    <DeliveryMethod>
+                      <Icon name="shop" size={14} color="#333" />
+                      Retirada no local
+                    </DeliveryMethod>
+                  )}
 
-                {item.payment_method == 'cash' ? (
-                  <PaymentMethod>
-                    <Icon name="attach-money" size={14} color="#333" />
-                    Dinheiro
-                  </PaymentMethod>
-                ) : (
-                  <PaymentMethod>
-                    <Icon name="credit-card" size={14} color="#333" />
-                    Cartão de Crédito
-                  </PaymentMethod>
-                )}
-                <Charge>
-                  <Icon name="arrow-back" size={14} color="#333" />
-                  {item.charge}
-                </Charge>
-              </Right>
-            </Card>
+                  {item.payment_method == 'cash' ? (
+                    <PaymentMethod>
+                      <Icon name="attach-money" size={14} color="#333" />
+                      Dinheiro
+                    </PaymentMethod>
+                  ) : (
+                    <PaymentMethod>
+                      <Icon name="credit-card" size={14} color="#333" />
+                      Cartão de Crédito
+                    </PaymentMethod>
+                  )}
+                  <Charge>
+                    <Icon name="arrow-back" size={14} color="#333" />
+                    R$ {item.charge}
+                  </Charge>
+                </Right>
+              </Card>
+            </Pressable>
           )}
         />
       )}

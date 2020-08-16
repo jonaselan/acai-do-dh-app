@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import Sale from './pages/Sale';
 import NewSale from './pages/Sale/New';
+import ShowSale from './pages/Sale/Show';
 
 import Delivery from './pages/Delivery';
 import Expense from './pages/Expense';
@@ -19,6 +20,7 @@ const Routes = createAppContainer(
           {
             Sale: Sale,
             NewSale: NewSale,
+            ShowSale: ShowSale,
           },
           {
             navigationOptions: {
@@ -27,7 +29,6 @@ const Routes = createAppContainer(
           },
         ),
       },
-      // SaleStack,
       Delivery,
       Expense,
       Statistic,

@@ -15,7 +15,7 @@ import {
   LabelInput,
 } from './styles';
 
-export default function NewSale() {
+export default function NewSale({navigation}) {
   const [loading, setLoading] = useState(false);
   const [charge, setCharge] = useState('0');
   const [value, setValue] = useState('');
@@ -28,7 +28,6 @@ export default function NewSale() {
 
   // TODO: ao clicar fora do texto, dismiss teclado
   // TODO: Validar campo de valor da venda
-  // TODO: Depois de criar voltar para a tela de listagem
 
   const payment_methods = [
     {label: 'Dinheiro', value: 0},
@@ -61,6 +60,8 @@ export default function NewSale() {
     });
 
     setLoading(false);
+
+    navigation.navigate('Sale');
   }
 
   return (
