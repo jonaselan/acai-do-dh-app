@@ -4,6 +4,7 @@ import {ActivityIndicator, Pressable} from 'react-native';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
+import {withNavigationFocus} from 'react-navigation';
 
 import {
   Container,
@@ -20,9 +21,8 @@ import {
   Charge,
 } from './styles';
 
-// TODO: Ao entrar na tela, sempre fazer a requisição novamente para sempre pegar os valores mais recentes
 // TODO: Talvez adc um pull to refresh
-export default function Sale({navigation}) {
+function Sale({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
   const [sales, setSales] = useState([]);
   const [page, setPage] = useState(1);
@@ -33,8 +33,10 @@ export default function Sale({navigation}) {
   }
 
   useEffect(() => {
-    loadSales();
-  }, []);
+    if (isFocused) {
+      loadSales();
+    }
+  }, [isFocused]);
 
   async function loadSales() {
     setLoading(true);
@@ -123,3 +125,5 @@ export default function Sale({navigation}) {
 Sale.navigationOptions = {
   title: 'Vendas',
 };
+
+export default withNavigationFocus(Sale);
