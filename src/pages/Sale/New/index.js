@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, ScrollView} from 'react-native';
+import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
@@ -120,6 +120,7 @@ export default function NewSale({navigation}) {
             <LabelInput>Entregador</LabelInput>
             {deliverymen ? (
               <Picker
+                selectedValue={deliveryman}
                 style={{height: 50, width: 300}}
                 onValueChange={(itemValue) => setDeliveryman(itemValue)}>
                 {deliverymen.map((deliverym, i) => {

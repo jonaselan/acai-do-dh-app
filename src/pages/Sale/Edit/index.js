@@ -122,7 +122,7 @@ export default function EditSale({navigation}) {
             <LabelInput>Entregador</LabelInput>
             {deliverymen ? (
               <Picker
-                selectedValue={sale.deliveryman_id}
+                selectedValue={deliveryman}
                 style={{height: 50, width: 300}}
                 onValueChange={(itemValue) => setDeliveryman(itemValue)}>
                 {deliverymen.map((deliverym, i) => {
