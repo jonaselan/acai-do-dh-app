@@ -41,7 +41,6 @@ export const Card = styled.View`
 
 export const Left = styled.View`
   flex: 1;
-  /* height: 40px; */
 `;
 
 export const Value = styled.Text`
@@ -59,7 +58,7 @@ export const Right = styled.View`
 
 export const CreatedAt = styled.Text`
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
 `;
 

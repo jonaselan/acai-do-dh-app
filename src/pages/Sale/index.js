@@ -3,6 +3,7 @@ import {ActivityIndicator} from 'react-native';
 // import AsyncStore from '@react-native-community/async-storage';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import moment from 'moment';
 
 import {
   Container,
@@ -69,7 +70,9 @@ export default function Sale({navigation}) {
             <Card>
               <Left>
                 <Value>R$ {item.value}</Value>
-                <CreatedAt>20/07/2000</CreatedAt>
+                <CreatedAt>
+                  {moment(item.created_at).format('DD/MM/YYYY hh:mm:ss')}
+                </CreatedAt>
               </Left>
 
               <Right>
