@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Pressable} from 'react-native';
 import api from '../../services/api';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import {withNavigationFocus} from 'react-navigation';
 

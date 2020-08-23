@@ -157,7 +157,7 @@ export default function EditSale({navigation}) {
         {loading ? (
           <ActivityIndicator color="#FFF" />
         ) : (
-          <Icon name="add" size={11} color="#FFF">
+          <Icon name="edit" size={11} color="#FFF">
             <SubmitButtonText>Editar</SubmitButtonText>
           </Icon>
         )}

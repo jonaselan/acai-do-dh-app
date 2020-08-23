@@ -9,12 +9,12 @@ import NewSale from './pages/Sale/New';
 import ShowSale from './pages/Sale/Show';
 import EditSale from './pages/Sale/Edit';
 
-import Delivery from './pages/Delivery';
-
 import Expense from './pages/Expense';
 import NewExpense from './pages/Expense/New';
 import ShowExpense from './pages/Expense/Show';
 import EditExpense from './pages/Expense/Edit';
+
+import Deliveryman from './pages/Deliveryman';
 
 import Statistic from './pages/Statistic';
 
@@ -51,7 +51,18 @@ const Routes = createAppContainer(
           },
         ),
       },
-      Delivery,
+      Deliveryman: {
+        screen: createStackNavigator(
+          {
+            Deliveryman: Deliveryman,
+          },
+          {
+            navigationOptions: {
+              tabBarLabel: 'Entregadores',
+            },
+          },
+        ),
+      },
       Statistic,
     },
     {
@@ -61,7 +72,7 @@ const Routes = createAppContainer(
           let iconName;
           if (routeName === 'Sale') {
             iconName = 'local-offer';
-          } else if (routeName === 'Delivery') {
+          } else if (routeName === 'Deliveryman') {
             iconName = 'motorcycle';
           } else if (routeName === 'Expense') {
             iconName = 'attach-money';
