@@ -10,7 +10,12 @@ import ShowSale from './pages/Sale/Show';
 import EditSale from './pages/Sale/Edit';
 
 import Delivery from './pages/Delivery';
+
 import Expense from './pages/Expense';
+import NewExpense from './pages/Expense/New';
+import ShowExpense from './pages/Expense/Show';
+import EditExpense from './pages/Expense/Edit';
+
 import Statistic from './pages/Statistic';
 
 const Routes = createAppContainer(
@@ -31,8 +36,22 @@ const Routes = createAppContainer(
           },
         ),
       },
+      Expense: {
+        screen: createStackNavigator(
+          {
+            Expense: Expense,
+            NewExpense: NewExpense,
+            ShowExpense: ShowExpense,
+            EditExpense: EditExpense,
+          },
+          {
+            navigationOptions: {
+              tabBarLabel: 'Despesas',
+            },
+          },
+        ),
+      },
       Delivery,
-      Expense,
       Statistic,
     },
     {

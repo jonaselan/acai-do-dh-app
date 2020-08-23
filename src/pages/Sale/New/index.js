@@ -26,7 +26,6 @@ export default function NewSale({navigation}) {
 
   const [deliverymen, setDeliverymen] = useState(null);
 
-  // TODO: ao clicar fora do texto, dismiss teclado
   // TODO: Validar campo de valor da venda
 
   const payment_methods = [

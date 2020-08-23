@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import {RectButton} from 'react-native-gesture-handler';
 
-// export const Container = styled.View`
-//   flex: 1;
-//   padding: 0 30px;
-//   justify-content: center;
-//   align-items: center;
-// `;
-
 export const Container = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
   contentContainerStyle: {padding: 30},

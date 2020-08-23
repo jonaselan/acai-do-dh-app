@@ -53,7 +53,7 @@ export const Right = styled.View`
   justify-content: center;
   align-items: flex-start;
   border-radius: 4px;
-  padding: 0 42px;
+  padding: 0 35px;
 `;
 
 export const CreatedAt = styled.Text`
