@@ -38,7 +38,7 @@ export default function ShowSale({navigation}) {
     navigation.navigate('Sale');
   }
 
-  const dialogDelete = () =>
+  const dialogDelete = () => {
     Alert.alert(
       'Tem certeza?',
       'Essa ação não poderá ser desfeita',
@@ -52,6 +52,7 @@ export default function ShowSale({navigation}) {
       ],
       {cancelable: false},
     );
+  };
 
   return (
     <Container>

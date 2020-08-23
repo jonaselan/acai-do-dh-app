@@ -40,16 +40,23 @@ export const Card = styled.View`
   margin: 0 10px 20px;
 `;
 
-// export const Avatar = styled.Image`
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 25px;
-// `;
-
 export const Name = styled.Text`
   margin-top: 15px;
   font-size: 14px;
   font-weight: bold;
   color: #333;
   text-align: center;
+`;
+
+export const Actions = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ActionButton = styled(RectButton)`
+  justify-content: center;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
 `;

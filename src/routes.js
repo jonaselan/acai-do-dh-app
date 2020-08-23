@@ -15,6 +15,8 @@ import ShowExpense from './pages/Expense/Show';
 import EditExpense from './pages/Expense/Edit';
 
 import Deliveryman from './pages/Deliveryman';
+import NewDeliveryman from './pages/Deliveryman/New';
+import EditDeliveryman from './pages/Deliveryman/Edit';
 
 import Statistic from './pages/Statistic';
 
@@ -24,10 +26,10 @@ const Routes = createAppContainer(
       Sale: {
         screen: createStackNavigator(
           {
-            Sale: Sale,
-            NewSale: NewSale,
-            ShowSale: ShowSale,
-            EditSale: EditSale,
+            Sale,
+            NewSale,
+            ShowSale,
+            EditSale,
           },
           {
             navigationOptions: {
@@ -39,10 +41,10 @@ const Routes = createAppContainer(
       Expense: {
         screen: createStackNavigator(
           {
-            Expense: Expense,
-            NewExpense: NewExpense,
-            ShowExpense: ShowExpense,
-            EditExpense: EditExpense,
+            Expense,
+            NewExpense,
+            ShowExpense,
+            EditExpense,
           },
           {
             navigationOptions: {
@@ -54,7 +56,9 @@ const Routes = createAppContainer(
       Deliveryman: {
         screen: createStackNavigator(
           {
-            Deliveryman: Deliveryman,
+            Deliveryman,
+            NewDeliveryman,
+            EditDeliveryman,
           },
           {
             navigationOptions: {

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, Alert} from 'react-native';
 import api from '../../services/api';
-// import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
   Container,
@@ -10,6 +10,8 @@ import {
   Button,
   ButtonText,
   Name,
+  Actions,
+  ActionButton,
 } from './styles';
 
 export default function Deliveryman({navigation}) {
@@ -32,9 +34,31 @@ export default function Deliveryman({navigation}) {
     setLoading(false);
   }
 
-  function showDeliverymen(expense) {
-    navigation.navigate('ShowDeliverymen', {expense});
+  function navigateEdit(deliveryman) {
+    navigation.navigate('EditDeliveryman', {deliveryman});
   }
+
+  async function handleDelete(deliverymanId) {
+    await api.delete(`deliverymen/${deliverymanId}`);
+
+    loadDeliverymen();
+  }
+
+  const dialogDelete = (id) => {
+    Alert.alert(
+      'Tem certeza?',
+      'Essa ação não poderá ser desfeita',
+      [
+        {
+          text: 'Cancelar',
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => handleDelete(id)},
+        ,
+      ],
+      {cancelable: false},
+    );
+  };
 
   return (
     <Container>
@@ -48,14 +72,15 @@ export default function Deliveryman({navigation}) {
           data={deliverymen}
           keyExtractor={(deliveryman) => String(deliveryman.id)}
           renderItem={({item: deliveryman}) => (
-            <Card onPress={() => showDeliverymen()}>
-              {/* <Avatar
-                source={{
-                  uri: deliveryman.avatar
-                    ? deliveryman.avatar.url
-                    : `https://api.adorable.io/avatar/50/${deliveryman.name}.png`,
-                }}
-              /> */}
+            <Card>
+              <Actions>
+                <ActionButton onPress={() => dialogDelete(deliveryman.id)}>
+                  <Icon name="delete" size={18} color="#000" />
+                </ActionButton>
+                <ActionButton onPress={() => navigateEdit(deliveryman)}>
+                  <Icon name="edit" size={18} color="#000" />
+                </ActionButton>
+              </Actions>
               <Name>{deliveryman.name}</Name>
             </Card>
           )}
