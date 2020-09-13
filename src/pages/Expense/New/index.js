@@ -9,6 +9,7 @@ import {
   Container,
   Form,
   Input,
+  InputArea,
   SubmitButton,
   SubmitButtonText,
   LabelInput,
@@ -18,6 +19,7 @@ export default function NewExpense({navigation}) {
   const [loading, setLoading] = useState(false);
   const [kind, setKind] = useState(0);
   const [value, setValue] = useState('');
+  const [description, setDescription] = useState('');
 
   const kindOptions = [
     {label: 'Açai', value: 0},
@@ -31,8 +33,9 @@ export default function NewExpense({navigation}) {
   async function handleSubmit() {
     setLoading(true);
     await api.post('expenses', {
-      value: value,
+      value,
       kind: kinds[kind],
+      description,
     });
 
     setLoading(false);
@@ -61,6 +64,16 @@ export default function NewExpense({navigation}) {
           onPress={(value) => {
             setKind(value);
           }}
+        />
+        <LabelInput>Descrição</LabelInput>
+        <InputArea
+          autoCorrect={false}
+          multiline={true}
+          numberOfLines={4}
+          autoCapitalize="none"
+          placeholder="Descrição"
+          value={description}
+          onChangeText={setDescription}
         />
       </Form>
 

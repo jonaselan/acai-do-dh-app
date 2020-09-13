@@ -12,6 +12,7 @@ import {
   SubmitButton,
   SubmitButtonText,
   LabelInput,
+  InputArea,
 } from './styles';
 
 export default function EditExpense({navigation}) {
@@ -34,6 +35,7 @@ export default function EditExpense({navigation}) {
   const [loading, setLoading] = useState(false);
   const [kind, setKind] = useState(kinds[expense.kind]);
   const [value, setValue] = useState(expense.value);
+  const [description, setDescription] = useState(expense.description);
 
   async function handleSubmit() {
     setLoading(true);
@@ -44,6 +46,7 @@ export default function EditExpense({navigation}) {
     await api.patch(`expenses/${expense.id}`, {
       value: value,
       kind: invertKinds[kind],
+      description,
     });
 
     setLoading(false);
@@ -65,7 +68,7 @@ export default function EditExpense({navigation}) {
           onChangeText={setValue}
         />
 
-        <LabelInput>tipo</LabelInput>
+        <LabelInput>Tipo</LabelInput>
         <RadioForm
           radio_props={kindOptions}
           initial={kind}
@@ -74,6 +77,17 @@ export default function EditExpense({navigation}) {
           onPress={(value) => {
             setKind(value);
           }}
+        />
+
+        <LabelInput>Descrição</LabelInput>
+        <InputArea
+          autoCorrect={false}
+          multiline={true}
+          numberOfLines={4}
+          autoCapitalize="none"
+          placeholder="Descrição"
+          value={description}
+          onChangeText={setDescription}
         />
       </Form>
 

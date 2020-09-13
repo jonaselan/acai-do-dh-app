@@ -80,7 +80,7 @@ function Sale({navigation, isFocused}) {
                 <Left>
                   <Value>R$ {item.value}</Value>
                   <CreatedAt>
-                    {moment(item.created_at).format('DD/MM/YYYY hh:mm:ss')}
+                    {moment(item.created_at).format('DD/MM/YYYY HH:mm:ss')}
                   </CreatedAt>
                 </Left>
 

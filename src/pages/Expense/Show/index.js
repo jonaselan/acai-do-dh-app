@@ -71,6 +71,11 @@ export default function ShowExpense({navigation}) {
             Tipo:
             <Info>{kinds[data.kind]}</Info>
           </Label>
+
+          <Label>
+            Descrição:
+            <Info>{data.description}</Info>
+          </Label>
         </ExpenseInfos>
       ) : (
         <ActivityIndicator color="#000" />
