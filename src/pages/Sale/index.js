@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Pressable} from 'react-native';
+import {ActivityIndicator, Pressable, View} from 'react-native';
 // import AsyncStore from '@react-native-community/async-storage';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -86,10 +86,16 @@ function Sale({navigation, isFocused}) {
 
                 <Right>
                   {item.delivery_method == 'delivery' ? (
-                    <DeliveryMethod>
-                      <Icon name="home" size={14} color="#333" />
-                      Entrega em casa
-                    </DeliveryMethod>
+                    <View>
+                      <DeliveryMethod>
+                        <Icon name="home" size={14} color="#333" />
+                        Entrega em casa
+                      </DeliveryMethod>
+                      <DeliveryMethod>
+                        <Icon name="motorcycle" size={14} color="#333" />
+                        {item.deliveryman.name}
+                      </DeliveryMethod>
+                    </View>
                   ) : (
                     <DeliveryMethod>
                       <Icon name="shop" size={14} color="#333" />
