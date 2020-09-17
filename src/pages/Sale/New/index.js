@@ -43,6 +43,7 @@ export default function NewSale({navigation}) {
   async function loadDeliverymen() {
     const response = await api.get('deliverymen');
 
+    setDeliveryman(response.data[0].id);
     setDeliverymen(response.data);
   }
 
