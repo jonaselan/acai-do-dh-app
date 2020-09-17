@@ -38,6 +38,10 @@ export default function Deliveryman({navigation}) {
     navigation.navigate('EditDeliveryman', {deliveryman});
   }
 
+  function navigateShow(deliveryman) {
+    navigation.navigate('ShowDeliveryman', {deliveryman});
+  }
+
   async function handleDelete(deliverymanId) {
     await api.delete(`deliverymen/${deliverymanId}`);
 
@@ -74,6 +78,9 @@ export default function Deliveryman({navigation}) {
           renderItem={({item: deliveryman}) => (
             <Card>
               <Actions>
+                <ActionButton onPress={() => navigateShow(deliveryman)}>
+                  <Icon name="info" size={18} color="#000" />
+                </ActionButton>
                 <ActionButton onPress={() => dialogDelete(deliveryman.id)}>
                   <Icon name="delete" size={18} color="#000" />
                 </ActionButton>

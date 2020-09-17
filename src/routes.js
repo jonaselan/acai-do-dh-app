@@ -17,6 +17,7 @@ import EditExpense from './pages/Expense/Edit';
 import Deliveryman from './pages/Deliveryman';
 import NewDeliveryman from './pages/Deliveryman/New';
 import EditDeliveryman from './pages/Deliveryman/Edit';
+import ShowDeliveryman from './pages/Deliveryman/Show';
 
 import Statistic from './pages/Statistic';
 
@@ -59,6 +60,7 @@ const Routes = createAppContainer(
             Deliveryman,
             NewDeliveryman,
             EditDeliveryman,
+            ShowDeliveryman,
           },
           {
             navigationOptions: {

@@ -15,8 +15,6 @@ export const Form = styled.View`
   border-bottom-width: 1px;
 `;
 
-export const DeliveryMethodView = styled.View``;
-
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#999',
 })`

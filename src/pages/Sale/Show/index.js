@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Alert} from 'react-native';
+import {ActivityIndicator, Alert, View} from 'react-native';
 import api from '../../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -8,7 +8,6 @@ import {
   SaleInfos,
   Label,
   Info,
-  DeliveryMethodView,
   Actions,
   ActionButton,
   ActionButtonText,
@@ -85,7 +84,7 @@ export default function ShowSale({navigation}) {
           </Label>
 
           {data.delivery_method == 'delivery' ? (
-            <DeliveryMethodView>
+            <View>
               <Label>
                 Entregador: <Info>{data.deliveryman.name}</Info>
               </Label>
@@ -93,9 +92,9 @@ export default function ShowSale({navigation}) {
               <Label>
                 Taxa de entrega: R$ <Info>{data.delivery_fee}</Info>
               </Label>
-            </DeliveryMethodView>
+            </View>
           ) : (
-            <DeliveryMethodView />
+            <View />
           )}
         </SaleInfos>
       ) : (

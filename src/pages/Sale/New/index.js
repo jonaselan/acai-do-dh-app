@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, View} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
@@ -9,7 +9,6 @@ import {
   Container,
   Form,
   Input,
-  DeliveryMethodView,
   SubmitButton,
   SubmitButtonText,
   LabelInput,
@@ -113,9 +112,9 @@ export default function NewSale({navigation}) {
         />
 
         {deliveryMethod ? (
-          <DeliveryMethodView />
+          <View />
         ) : (
-          <DeliveryMethodView>
+          <View>
             <LabelInput>Entregador</LabelInput>
             {deliverymen ? (
               <Picker
@@ -145,7 +144,7 @@ export default function NewSale({navigation}) {
               value={deliveryFee}
               onChangeText={setDeliveryFee}
             />
-          </DeliveryMethodView>
+          </View>
         )}
       </Form>
 
