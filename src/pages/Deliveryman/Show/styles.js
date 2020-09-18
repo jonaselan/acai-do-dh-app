@@ -30,10 +30,19 @@ export const SaleList = styled.FlatList.attrs({
   margin-top: 20px;
 `;
 
-export const ActionButton = styled(RectButton)`
+export const ButtonIcon = styled(RectButton)`
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
+export const ActionButton = styled(RectButton)`
+  border-radius: 4px;
+  background: #7159c1;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  padding: 0 10px;
 `;
 
 export const ActionButtonText = styled.Text`
