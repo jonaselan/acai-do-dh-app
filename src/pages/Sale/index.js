@@ -80,6 +80,7 @@ function Sale({navigation, isFocused}) {
                 <Left>
                   <Value>R$ {item.value}</Value>
                   <CreatedAt>
+                    <Icon name="access-time" size={14} color="#333" />
                     {moment(item.created_at).format('DD/MM/YYYY HH:mm:ss')}
                   </CreatedAt>
                 </Left>
@@ -115,7 +116,7 @@ function Sale({navigation, isFocused}) {
                     </PaymentMethod>
                   )}
                   <Charge>
-                    <Icon name="arrow-back" size={14} color="#333" />
+                    <Icon name="arrow-forward" size={14} color="#333" />
                     R$ {item.charge}
                   </Charge>
                 </Right>

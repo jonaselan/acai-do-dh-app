@@ -67,7 +67,25 @@ export const Left = styled.View`
 
 export const Value = styled.Text`
   font-weight: bold;
-  font-size: 30px;
+  font-size: 25px;
+  color: #333;
+`;
+
+export const Charge = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+`;
+
+export const DeliveryFee = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
+  color: #333;
+`;
+
+export const CreatedAt = styled.Text`
+  font-weight: bold;
+  font-size: 14px;
   color: #333;
 `;
 
@@ -76,10 +94,4 @@ export const Right = styled.View`
   align-items: flex-start;
   border-radius: 4px;
   padding: 0 35px;
-`;
-
-export const CreatedAt = styled.Text`
-  font-weight: bold;
-  font-size: 14px;
-  color: #333;
 `;

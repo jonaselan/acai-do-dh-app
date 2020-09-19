@@ -18,6 +18,8 @@ import {
   Right,
   CreatedAt,
   Value,
+  Charge,
+  DeliveryFee,
 } from './styles';
 
 export default function ShowDeliveryman({navigation}) {
@@ -81,7 +83,9 @@ export default function ShowDeliveryman({navigation}) {
       {data ? (
         <View>
           <SalesInfo>
-            <Label>Quanto a pagar: R$ {data.info?.sales_amount} ({data.info?.sales_count})</Label>
+            <Label>
+              Quanto a pagar: R$ {data.info?.sales_amount} ({data.info?.sales_count})
+            </Label>
           </SalesInfo>
 
           <SalesInfo>
@@ -96,6 +100,10 @@ export default function ShowDeliveryman({navigation}) {
               <Card>
                 <Left>
                   <Value>R$ {item.value}</Value>
+                  <Charge> Troco: R$ {item.charge} </Charge>
+                  <DeliveryFee>
+                    Taxa entrega: R$ {item.delivery_fee}
+                  </DeliveryFee>
                   <CreatedAt>
                     {moment(item.created_at).format('DD/MM/YYYY HH:mm:ss')}
                   </CreatedAt>
@@ -105,11 +113,14 @@ export default function ShowDeliveryman({navigation}) {
                   <ButtonIcon onPress={() => showSale(item)}>
                     <Icon name="info" size={20} color="#333" />
                   </ButtonIcon>
-                  <CheckBox
+                  <ActionButton onPress={() => dialogConfirm()}>
+                    <ActionButtonText> Recebi </ActionButtonText>
+                  </ActionButton>
+                </Right>
+                <CheckBox
                     value={isSaleToPay(item.id)}
                     onChange={(newValue) => toggleSale(item.id)}
                   />
-                </Right>
               </Card>
             )}
           />
