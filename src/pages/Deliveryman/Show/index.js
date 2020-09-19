@@ -95,8 +95,13 @@ export default function ShowDeliveryman({navigation}) {
           </SalesInfo>
 
           <SalesInfo>
+            <Label> Total: R$ {data.info?.sales_amount_total} </Label>
+            <Label> Total de vendas: {data.info?.sales_count_total} </Label>
+          </SalesInfo>
+
+          <SalesInfo>
             <ActionButton onPress={() => dialogConfirmBunchUpdate()}>
-              <ActionButtonText> Marcar como pago </ActionButtonText>
+              <ActionButtonText> Marcar selecionados como pago </ActionButtonText>
             </ActionButton>
           </SalesInfo>
           <SaleList
