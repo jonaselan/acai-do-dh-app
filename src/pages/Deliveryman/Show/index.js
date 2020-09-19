@@ -33,7 +33,7 @@ export default function ShowDeliveryman({navigation}) {
 
   async function loadDeliveryman() {
     const response = await api.get(`deliverymen/${deliveryman.id}/sales`);
-    console.log(response.data);
+    // console.log(response.data);
 
     setData(response.data);
   }
@@ -57,13 +57,19 @@ export default function ShowDeliveryman({navigation}) {
     return saleIds.includes(saleId);
   }
 
-  async function handleUpdate() {
+  async function handleBunchUpdate() {
     await api.put('sales/bunch_update', {
       ids: saleIds,
     });
   }
 
-  const dialogConfirm = () =>
+  async function handleUpdateReceiver(saleId) {
+    await api.put(`sales/${saleId}`, {
+      receiver: true,
+    });
+  }
+
+  const dialogConfirmBunchUpdate = () =>
     Alert.alert(
       'Tem certeza?',
       'Essa ação não poderá ser desfeita',
@@ -72,7 +78,7 @@ export default function ShowDeliveryman({navigation}) {
           text: 'Cancelar',
           style: 'cancel',
         },
-        {text: 'OK', onPress: () => handleUpdate()},
+        {text: 'OK', onPress: () => handleBunchUpdate()},
         ,
       ],
       {cancelable: false},
@@ -89,7 +95,7 @@ export default function ShowDeliveryman({navigation}) {
           </SalesInfo>
 
           <SalesInfo>
-            <ActionButton onPress={() => dialogConfirm()}>
+            <ActionButton onPress={() => dialogConfirmBunchUpdate()}>
               <ActionButtonText> Marcar como pago </ActionButtonText>
             </ActionButton>
           </SalesInfo>
@@ -113,14 +119,17 @@ export default function ShowDeliveryman({navigation}) {
                   <ButtonIcon onPress={() => showSale(item)}>
                     <Icon name="info" size={20} color="#333" />
                   </ButtonIcon>
-                  <ActionButton onPress={() => dialogConfirm()}>
-                    <ActionButtonText> Recebi </ActionButtonText>
+                  <ActionButton
+                    disabled={item.receiver}
+                    onPress={() => handleUpdateReceiver(item.id)}>
+                      <ActionButtonText> Recebi </ActionButtonText>
                   </ActionButton>
                 </Right>
                 <CheckBox
-                    value={isSaleToPay(item.id)}
-                    onChange={(newValue) => toggleSale(item.id)}
-                  />
+                  disabled={item.paid}
+                  value={isSaleToPay(item.id)}
+                  onChange={(newValue) => toggleSale(item.id)}
+                />
               </Card>
             )}
           />

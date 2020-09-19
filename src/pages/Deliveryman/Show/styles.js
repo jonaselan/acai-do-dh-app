@@ -43,6 +43,7 @@ export const ActionButton = styled(RectButton)`
   align-items: center;
   height: 36px;
   padding: 0 10px;
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
 `;
 
 export const ActionButtonText = styled.Text`
