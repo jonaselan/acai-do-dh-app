@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Pressable} from 'react-native';
+import {ActivityIndicator, DatePickerAndroid, Pressable} from 'react-native';
 import api from '../../services/api';
 import moment from 'moment';
 import {withNavigationFocus} from 'react-navigation';
@@ -20,7 +20,7 @@ import {
 // TODO: Talvez adc um pull to refresh
 function Expense({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
-  const [expenses, setExpenses] = useState([]);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(8);
   const kinds = {
@@ -45,7 +45,7 @@ function Expense({navigation, isFocused}) {
     setLoading(true);
     const response = await api.get('expenses');
 
-    setExpenses(response.data);
+    setData(response.data);
     setLoading(false);
   }
 
@@ -58,7 +58,7 @@ function Expense({navigation, isFocused}) {
 
     if (response.data.length > 0) {
       setPage(newPage);
-      setExpenses([...expenses, ...response.data]);
+      setData([...data, ...response.data]);
     }
   }
 
@@ -77,7 +77,7 @@ function Expense({navigation, isFocused}) {
         <ExpenseList
           onEndReachedThreshold={0.2}
           onEndReached={loadMoreExpenses}
-          data={expenses}
+          data={data.expenses}
           keyExtractor={(expense) => expense.id}
           renderItem={({item}) => (
             <Pressable onPress={() => showExpense(item)}>

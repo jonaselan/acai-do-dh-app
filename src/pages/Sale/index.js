@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Pressable, View} from 'react-native';
-// import AsyncStore from '@react-native-community/async-storage';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
@@ -8,6 +8,9 @@ import {withNavigationFocus} from 'react-navigation';
 
 import {
   Container,
+  SalesInfo,
+  Label,
+  CommonButton,
   Button,
   ButtonText,
   SaleList,
@@ -24,9 +27,12 @@ import {
 // TODO: Talvez adc um pull to refresh
 function Sale({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
-  const [sales, setSales] = useState([]);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(8);
+
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
 
   function handleNavigate() {
     navigation.navigate('NewSale');
@@ -36,24 +42,27 @@ function Sale({navigation, isFocused}) {
     if (isFocused) {
       loadSales();
     }
-  }, [isFocused]);
+  }, [isFocused, date]);
 
   async function loadSales() {
     setLoading(true);
-    const response = await api.get('sales');
+    const day = moment(date).format('YYYY-MM-DD');
 
-    setSales(response.data);
+    const response = await api.get(`sales?day=${day}`);
+
+    setData(response.data);
     setLoading(false);
   }
 
   async function loadMoreSales() {
     const newPage = page + 1;
+    const day = moment(date).format('YYYY-MM-DD');
 
-    const response = await api.get(`sales?page=${newPage}&per_page=${perPage}`);
+    const response = await api.get(`sales?page=${newPage}&per_page=${perPage}&day=${day}`);
 
     if (response.data.length > 0) {
       setPage(newPage);
-      setSales([...sales, ...response.data]);
+      setData([...data, ...response.data]);
     }
   }
 
@@ -61,18 +70,49 @@ function Sale({navigation, isFocused}) {
     navigation.navigate('ShowSale', {sale});
   }
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+
+    setDate(currentDate);
+    setShowDatePicker(false);
+  };
+
+  const showDatepicker = () => {
+    setShowDatePicker(true);
+  };
+
   return (
     <Container>
+      <View>
+        <CommonButton onPress={showDatepicker} title={moment(date).format('DD-MM-YYYY')} />
+      </View>
+
+      {showDatePicker && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'date'}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+
       <Button onPress={() => handleNavigate()}>
         <ButtonText> Adicionar venda </ButtonText>
       </Button>
+      <SalesInfo>
+        <Label> Total: R$ {data.info?.credit} </Label>
+        <Label> Total de vendas: {data.info?.quantity} </Label>
+      </SalesInfo>
+
       {loading ? (
         <ActivityIndicator color="#000" />
       ) : (
         <SaleList
           onEndReachedThreshold={0.2}
           onEndReached={loadMoreSales}
-          data={sales}
+          data={data.sales}
           keyExtractor={(sale) => sale.id}
           renderItem={({item}) => (
             <Pressable onPress={() => showSale(item)}>

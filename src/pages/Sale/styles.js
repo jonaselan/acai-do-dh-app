@@ -13,6 +13,16 @@ export const SaleList = styled.FlatList.attrs({
   margin-top: 20px;
 `;
 
+export const CommonButton = styled.Button`
+  margin-top: 10px;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  background-color: #000;
+  border: #7159c1 1px solid;
+`;
+
 export const Button = styled(RectButton)`
   margin-top: 10px;
   align-self: stretch;
@@ -29,6 +39,19 @@ export const ButtonText = styled.Text`
   color: #fff;
   text-transform: uppercase;
 `;
+
+export const SalesInfo = styled.View`
+  align-self: stretch;
+  margin-top: 20px;
+  border-bottom-width: 1px;
+`;
+
+export const Label = styled.Text`
+  font-size: 20px;
+  color: #24292e;
+  padding: 8px 0;
+`;
+
 
 export const Card = styled.View`
   flex-direction: row;
