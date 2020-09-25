@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Alert} from 'react-native';
+import {ActivityIndicator, Alert, View} from 'react-native';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import DateTimePicker from '@react-native-community/datetimepicker';
+import moment from 'moment';
 
 import {
   Container,
   DeliverymanList,
   Card,
   Button,
+  CommonButton,
   ButtonText,
   Name,
   Actions,
@@ -18,17 +21,22 @@ export default function Deliveryman({navigation}) {
   const [loading, setLoading] = useState(false);
   const [deliverymen, setDeliverymen] = useState([]);
 
+  const [date, setDate] = useState(new Date());
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
   function handleNavigate() {
     navigation.navigate('NewDeliveryman');
   }
 
   useEffect(() => {
     loadDeliverymen();
-  }, []);
+  }, [date]);
 
   async function loadDeliverymen() {
     setLoading(true);
-    const response = await api.get('deliverymen');
+    const day = moment(date).format('YYYY-MM-DD');
+
+    const response = await api.get(`deliverymen/with_filters?day=${day}`);
 
     setDeliverymen(response.data);
     setLoading(false);
@@ -39,7 +47,9 @@ export default function Deliveryman({navigation}) {
   }
 
   function navigateShow(deliveryman) {
-    navigation.navigate('ShowDeliveryman', {deliveryman});
+    const day = moment(date).format('YYYY-MM-DD');
+
+    navigation.navigate('ShowDeliveryman', {deliveryman, day});
   }
 
   async function handleDelete(deliverymanId) {
@@ -64,8 +74,34 @@ export default function Deliveryman({navigation}) {
     );
   };
 
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date;
+
+    setDate(currentDate);
+    setShowDatePicker(false);
+  };
+
+  const showDatepicker = () => {
+    setShowDatePicker(true);
+  };
+
   return (
     <Container>
+      <View>
+        <CommonButton onPress={showDatepicker} title={moment(date).format('DD-MM-YYYY')} />
+      </View>
+
+      {showDatePicker && (
+        <DateTimePicker
+          testID="dateTimePicker"
+          value={date}
+          mode={'date'}
+          is24Hour={true}
+          display="default"
+          onChange={onChange}
+        />
+      )}
+
       <Button onPress={() => handleNavigate()}>
         <ButtonText> Adicionar entregador </ButtonText>
       </Button>

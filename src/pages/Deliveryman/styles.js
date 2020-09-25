@@ -60,3 +60,6 @@ export const ActionButton = styled(RectButton)`
   padding-left: 10px;
   padding-right: 10px;
 `;
+
+export const CommonButton = styled.Button`
+`;

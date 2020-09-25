@@ -9,6 +9,8 @@ import {
   Button,
   ButtonText,
   ExpenseList,
+  ExpensesInfo,
+  Label,
   Card,
   Left,
   Right,
@@ -71,6 +73,10 @@ function Expense({navigation, isFocused}) {
       <Button onPress={() => handleNavigate()}>
         <ButtonText> Adicionar despesa </ButtonText>
       </Button>
+      <ExpensesInfo>
+        <Label> Total: R$ {data.info?.debit} </Label>
+        {/* <Label> Total de vendas: {data.info?.quantity} </Label> */}
+      </ExpensesInfo>
       {loading ? (
         <ActivityIndicator color="#000" />
       ) : (

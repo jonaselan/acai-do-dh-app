@@ -14,13 +14,6 @@ export const SaleList = styled.FlatList.attrs({
 `;
 
 export const CommonButton = styled.Button`
-  margin-top: 10px;
-  border-radius: 4px;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  background-color: #000;
-  border: #7159c1 1px solid;
 `;
 
 export const Button = styled(RectButton)`
@@ -51,7 +44,6 @@ export const Label = styled.Text`
   color: #24292e;
   padding: 8px 0;
 `;
-
 
 export const Card = styled.View`
   flex-direction: row;

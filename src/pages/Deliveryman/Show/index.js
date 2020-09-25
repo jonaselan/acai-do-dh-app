@@ -24,16 +24,16 @@ import {
 
 export default function ShowDeliveryman({navigation}) {
   const deliveryman = navigation.getParam('deliveryman');
+  const day = navigation.getParam('day');
   const [saleIds, setSaleIds] = useState([]);
   const [data, setData] = useState([]);
 
   useEffect(() => {
     loadDeliveryman();
-  }, []);
+  }, [data]);
 
   async function loadDeliveryman() {
-    const response = await api.get(`deliverymen/${deliveryman.id}/sales`);
-    // console.log(response.data);
+    const response = await api.get(`deliverymen/${deliveryman.id}/sales?day=${day}`);
 
     setData(response.data);
   }

@@ -30,6 +30,18 @@ export const ButtonText = styled.Text`
   text-transform: uppercase;
 `;
 
+export const ExpensesInfo = styled.View`
+  align-self: stretch;
+  margin-top: 20px;
+  border-bottom-width: 1px;
+`;
+
+export const Label = styled.Text`
+  font-size: 20px;
+  color: #24292e;
+  padding: 8px 0;
+`;
+
 export const Card = styled.View`
   flex-direction: row;
   padding: 18px 20px;
