@@ -109,6 +109,8 @@ export default function Deliveryman({navigation}) {
         <ActivityIndicator color="#000" />
       ) : (
         <DeliverymanList
+          onRefresh={() => loadDeliverymen()}
+          refreshing={loading}
           data={deliverymen}
           keyExtractor={(deliveryman) => String(deliveryman.id)}
           renderItem={({item: deliveryman}) => (

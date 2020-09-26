@@ -113,6 +113,8 @@ function Sale({navigation, isFocused}) {
         [
           data.sales?.length ? (
             <SaleList
+              onRefresh={() => loadSales()}
+              refreshing={loading}
               onEndReachedThreshold={0.2}
               onEndReached={loadMoreSales}
               data={data.sales}
@@ -167,11 +169,10 @@ function Sale({navigation, isFocused}) {
                 </Pressable>
               )}
             />
-          ):
-          (
+          ) : (
             <EmptySales>
-                <Icon name="highlight-off" size={70} color="#333" />
-                <Text> Nenhum venda realiza </Text>
+              <Icon name="highlight-off" size={70} color="#333" />
+              <Text> Nenhum venda realiza </Text>
             </EmptySales>
           )
         ]

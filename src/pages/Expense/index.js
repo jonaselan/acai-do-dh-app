@@ -81,6 +81,8 @@ function Expense({navigation, isFocused}) {
         <ActivityIndicator color="#000" />
       ) : (
         <ExpenseList
+          onRefresh={() => loadExpenses()}
+          refreshing={loading}
           onEndReachedThreshold={0.2}
           onEndReached={loadMoreExpenses}
           data={data.expenses}
