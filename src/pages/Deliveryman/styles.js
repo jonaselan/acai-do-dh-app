@@ -57,8 +57,8 @@ export const Actions = styled.View`
 export const ActionButton = styled(RectButton)`
   justify-content: center;
   align-items: center;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 7px;
+  padding-right: 7px;
 `;
 
 export const CommonButton = styled.Button`

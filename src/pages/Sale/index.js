@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {ActivityIndicator, Pressable, View} from 'react-native';
+import {ActivityIndicator, Pressable, View, Text} from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -16,6 +16,7 @@ import {
   SaleList,
   Card,
   Left,
+  EmptySales,
   Right,
   CreatedAt,
   Value,
@@ -109,61 +110,71 @@ function Sale({navigation, isFocused}) {
       {loading ? (
         <ActivityIndicator color="#000" />
       ) : (
-        <SaleList
-          onEndReachedThreshold={0.2}
-          onEndReached={loadMoreSales}
-          data={data.sales}
-          keyExtractor={(sale) => sale.id}
-          renderItem={({item}) => (
-            <Pressable onPress={() => showSale(item)}>
-              <Card>
-                <Left>
-                  <Value>R$ {item.value}</Value>
-                  <CreatedAt>
-                    <Icon name="access-time" size={14} color="#333" />
-                    {moment(item.created_at).format('DD/MM/YYYY HH:mm:ss')}
-                  </CreatedAt>
-                </Left>
+        [
+          data.sales?.length ? (
+            <SaleList
+              onEndReachedThreshold={0.2}
+              onEndReached={loadMoreSales}
+              data={data.sales}
+              keyExtractor={(sale) => sale.id}
+              renderItem={({item}) => (
+                <Pressable onPress={() => showSale(item)}>
+                  <Card>
+                    <Left>
+                      <Value>R$ {item.value}</Value>
+                      <CreatedAt>
+                        <Icon name="access-time" size={14} color="#333" />
+                        {moment(item.created_at).format('DD/MM/YYYY HH:mm:ss')}
+                      </CreatedAt>
+                    </Left>
 
-                <Right>
-                  {item.delivery_method == 'delivery' ? (
-                    <View>
-                      <DeliveryMethod>
-                        <Icon name="home" size={14} color="#333" />
-                        Entrega em casa
-                      </DeliveryMethod>
-                      <DeliveryMethod>
-                        <Icon name="motorcycle" size={14} color="#333" />
-                        {item.deliveryman.name}
-                      </DeliveryMethod>
-                    </View>
-                  ) : (
-                    <DeliveryMethod>
-                      <Icon name="shop" size={14} color="#333" />
-                      Retirada no local
-                    </DeliveryMethod>
-                  )}
+                    <Right>
+                      {item.delivery_method == 'delivery' ? (
+                        <View>
+                          <DeliveryMethod>
+                            <Icon name="home" size={14} color="#333" />
+                            Entrega em casa
+                          </DeliveryMethod>
+                          <DeliveryMethod>
+                            <Icon name="motorcycle" size={14} color="#333" />
+                            {item.deliveryman.name}
+                          </DeliveryMethod>
+                        </View>
+                      ) : (
+                        <DeliveryMethod>
+                          <Icon name="shop" size={14} color="#333" />
+                          Retirada no local
+                        </DeliveryMethod>
+                      )}
 
-                  {item.payment_method == 'cash' ? (
-                    <PaymentMethod>
-                      <Icon name="attach-money" size={14} color="#333" />
-                      Dinheiro
-                    </PaymentMethod>
-                  ) : (
-                    <PaymentMethod>
-                      <Icon name="credit-card" size={14} color="#333" />
-                      Cartão de Crédito
-                    </PaymentMethod>
-                  )}
-                  <Charge>
-                    <Icon name="arrow-forward" size={14} color="#333" />
-                    R$ {item.charge}
-                  </Charge>
-                </Right>
-              </Card>
-            </Pressable>
-          )}
-        />
+                      {item.payment_method == 'cash' ? (
+                        <PaymentMethod>
+                          <Icon name="attach-money" size={14} color="#333" />
+                          Dinheiro
+                        </PaymentMethod>
+                      ) : (
+                        <PaymentMethod>
+                          <Icon name="credit-card" size={14} color="#333" />
+                          Cartão de Crédito
+                        </PaymentMethod>
+                      )}
+                      <Charge>
+                        <Icon name="arrow-forward" size={14} color="#333" />
+                        R$ {item.charge}
+                      </Charge>
+                    </Right>
+                  </Card>
+                </Pressable>
+              )}
+            />
+          ):
+          (
+            <EmptySales>
+                <Icon name="highlight-off" size={70} color="#333" />
+                <Text> Nenhum venda realiza </Text>
+            </EmptySales>
+          )
+        ]
       )}
     </Container>
   );

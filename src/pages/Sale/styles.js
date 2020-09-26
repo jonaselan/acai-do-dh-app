@@ -7,14 +7,20 @@ export const Container = styled.View`
   padding: 30px 30px 10px 30px;
 `;
 
+export const EmptySales = styled.View`
+  justify-content: center;
+  align-self: stretch;
+  margin-top: 50px;
+  align-items: center;
+`;
+
 export const SaleList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   margin-top: 20px;
 `;
 
-export const CommonButton = styled.Button`
-`;
+export const CommonButton = styled.Button``;
 
 export const Button = styled(RectButton)`
   margin-top: 10px;
@@ -60,7 +66,8 @@ export const Left = styled.View`
 
 export const Value = styled.Text`
   font-weight: bold;
-  font-size: 30px;
+  font-size: 26px;
+  padding-top: 5px;
   color: #333;
 `;
 

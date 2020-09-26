@@ -115,13 +115,13 @@ export default function Deliveryman({navigation}) {
             <Card>
               <Actions>
                 <ActionButton onPress={() => navigateShow(deliveryman)}>
-                  <Icon name="info" size={18} color="#000" />
+                  <Icon name="info" size={20} color="#000" />
                 </ActionButton>
                 <ActionButton onPress={() => dialogDelete(deliveryman.id)}>
-                  <Icon name="delete" size={18} color="#000" />
+                  <Icon name="delete" size={20} color="#000" />
                 </ActionButton>
                 <ActionButton onPress={() => navigateEdit(deliveryman)}>
-                  <Icon name="edit" size={18} color="#000" />
+                  <Icon name="edit" size={20} color="#000" />
                 </ActionButton>
               </Actions>
               <Name>{deliveryman.name}</Name>
