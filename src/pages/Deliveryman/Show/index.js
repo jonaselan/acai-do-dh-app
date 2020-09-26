@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
-import api from '../../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import CheckBox from '@react-native-community/checkbox';
+import api from '../../../services/api';
 
 import {
   Container,

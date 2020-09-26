@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
-import api from '../../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -34,6 +35,7 @@ export default function ShowSale({navigation}) {
   async function handleDelete() {
     await api.delete(`sales/${sale.id}`);
 
+    toast('Venda apagada com sucesso!');
     navigation.navigate('Sale');
   }
 

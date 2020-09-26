@@ -4,6 +4,7 @@ import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -60,6 +61,7 @@ export default function EditSale({navigation}) {
     });
 
     setLoading(false);
+    toast('Venda editada com sucesso!');
 
     navigation.navigate('Sale');
   }

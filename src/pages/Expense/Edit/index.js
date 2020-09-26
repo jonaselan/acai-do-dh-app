@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -50,6 +50,7 @@ export default function EditExpense({navigation}) {
     });
 
     setLoading(false);
+    toast('Despesa editada com sucesso!');
 
     navigation.navigate('Expense');
   }

@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Alert} from 'react-native';
-import api from '../../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -41,6 +42,7 @@ export default function ShowExpense({navigation}) {
   async function handleDelete() {
     await api.delete(`expenses/${expense.id}`);
 
+    toast('Despesa apagada com sucesso!');
     navigation.navigate('Expense');
   }
 

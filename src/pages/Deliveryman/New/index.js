@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-// import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -24,6 +24,7 @@ export default function NewDeliveryman({navigation}) {
     });
 
     setLoading(false);
+    toast('Entregador criado com sucesso!');
 
     navigation.navigate('Deliveryman');
   }

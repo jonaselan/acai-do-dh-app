@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../../services/api';
+import toast from '../../../services/toast';
 
 import {
   Container,
@@ -24,6 +25,7 @@ export default function EditDeliveryman({navigation}) {
     });
 
     setLoading(false);
+    toast('Entregador editada com sucesso!');
 
     navigation.navigate('Deliveryman');
   }

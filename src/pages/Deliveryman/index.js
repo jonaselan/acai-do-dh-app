@@ -1,9 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Alert, View} from 'react-native';
-import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import api from '../../services/api';
+import toast from '../../services/toast';
 
 import {
   Container,
@@ -55,6 +56,7 @@ export default function Deliveryman({navigation}) {
   async function handleDelete(deliverymanId) {
     await api.delete(`deliverymen/${deliverymanId}`);
 
+    toast('Entregador apagado com sucesso!');
     loadDeliverymen();
   }
 
