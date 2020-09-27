@@ -3,19 +3,18 @@ import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;
-  padding: 0 30px;
+  padding: 30px 30px 10px 30px;
 `;
 
 export const SalesInfo = styled.View`
   align-self: stretch;
-  margin-top: 20px;
   border-bottom-width: 1px;
 `;
 
 export const Label = styled.Text`
   font-size: 20px;
   color: #24292e;
-  padding: 8px 0;
+  padding: 5px 0;
 `;
 
 export const Info = styled.Text`
@@ -28,6 +27,7 @@ export const SaleList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
 })`
   margin-top: 20px;
+  margin-bottom: 130px;
 `;
 
 export const ButtonIcon = styled(RectButton)`

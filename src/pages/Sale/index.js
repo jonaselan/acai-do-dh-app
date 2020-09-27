@@ -25,7 +25,6 @@ import {
   Charge,
 } from './styles';
 
-// TODO: Talvez adc um pull to refresh
 function Sale({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);

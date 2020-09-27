@@ -41,14 +41,13 @@ export const ButtonText = styled.Text`
 
 export const SalesInfo = styled.View`
   align-self: stretch;
-  margin-top: 20px;
   border-bottom-width: 1px;
 `;
 
 export const Label = styled.Text`
   font-size: 20px;
   color: #24292e;
-  padding: 8px 0;
+  padding: 5px 0;
 `;
 
 export const Card = styled.View`
