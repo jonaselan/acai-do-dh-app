@@ -65,7 +65,6 @@ export const Right = styled.View`
   justify-content: center;
   align-items: flex-start;
   border-radius: 4px;
-  padding: 0 35px;
 `;
 
 export const CreatedAt = styled.Text`
@@ -76,6 +75,6 @@ export const CreatedAt = styled.Text`
 
 export const Kind = styled.Text`
   font-weight: bold;
-  font-size: 15px;
+  font-size: 13px;
   color: #333;
 `;

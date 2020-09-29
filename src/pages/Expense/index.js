@@ -19,7 +19,6 @@ import {
   Kind,
 } from './styles';
 
-// TODO: Talvez adc um pull to refresh
 function Expense({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);

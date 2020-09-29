@@ -4,12 +4,14 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
+import {Picker} from '@react-native-community/picker';
 import {withNavigationFocus} from 'react-navigation';
 
 import {
   Container,
   SalesInfo,
   Label,
+  Filters,
   CommonButton,
   Button,
   ButtonText,
@@ -29,6 +31,7 @@ function Sale({navigation, isFocused}) {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
+  const [paymentMethod, setPaymentMethod] = useState('');
   const [perPage, setPerPage] = useState(8);
 
   const [date, setDate] = useState(new Date());
@@ -42,13 +45,13 @@ function Sale({navigation, isFocused}) {
     if (isFocused) {
       loadSales();
     }
-  }, [isFocused, date]);
+  }, [isFocused, date, paymentMethod]);
 
   async function loadSales() {
     setLoading(true);
     const day = moment(date).format('YYYY-MM-DD');
 
-    const response = await api.get(`sales?day=${day}`);
+    const response = await api.get(`sales?day=${day}&payment_method=${paymentMethod}`);
 
     setData(response.data);
     setLoading(false);
@@ -58,7 +61,7 @@ function Sale({navigation, isFocused}) {
     const newPage = page + 1;
     const day = moment(date).format('YYYY-MM-DD');
 
-    const response = await api.get(`sales?page=${newPage}&per_page=${perPage}&day=${day}`);
+    const response = await api.get(`sales?page=${newPage}&per_page=${perPage}&day=${day}&payment_method=${paymentMethod}`);
 
     if (response.data.length > 0) {
       setPage(newPage);
@@ -83,10 +86,6 @@ function Sale({navigation, isFocused}) {
 
   return (
     <Container>
-      <View>
-        <CommonButton onPress={showDatepicker} title={moment(date).format('DD-MM-YYYY')} />
-      </View>
-
       {showDatePicker && (
         <DateTimePicker
           testID="dateTimePicker"
@@ -97,6 +96,22 @@ function Sale({navigation, isFocused}) {
           onChange={onChange}
         />
       )}
+
+      <Filters>
+        <Left>
+          <CommonButton onPress={showDatepicker} title={moment(date).format('DD-MM-YYYY')} />
+        </Left>
+        <Right>
+          <Picker
+            selectedValue={paymentMethod}
+            style={{height: 50, width: 150}}
+            onValueChange={(itemValue) => setPaymentMethod(itemValue)}>
+              <Picker.Item label='Nenhum' value='' />
+              <Picker.Item label='Dinheiro' value='cash' />
+              <Picker.Item label='Cartão de Crédito' value='credit_card' />
+          </Picker>
+        </Right>
+      </Filters>
 
       <Button onPress={() => handleNavigate()}>
         <ButtonText> Adicionar venda </ButtonText>

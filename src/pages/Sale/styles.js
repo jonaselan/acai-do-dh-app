@@ -32,6 +32,11 @@ export const Button = styled(RectButton)`
   height: 36px;
 `;
 
+export const Filters = styled.View`
+  flex-direction: row;
+  margin-bottom: 5px;
+`;
+
 export const ButtonText = styled.Text`
   font-size: 14px;
   font-weight: bold;
@@ -74,7 +79,6 @@ export const Right = styled.View`
   justify-content: center;
   align-items: flex-start;
   border-radius: 4px;
-  padding: 0 35px;
 `;
 
 export const CreatedAt = styled.Text`
@@ -85,13 +89,13 @@ export const CreatedAt = styled.Text`
 
 export const PaymentMethod = styled.Text`
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
 `;
 
 export const DeliveryMethod = styled.Text`
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
   color: #333;
 `;
 
