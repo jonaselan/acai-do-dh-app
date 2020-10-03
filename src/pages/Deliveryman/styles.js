@@ -23,6 +23,17 @@ export const ButtonText = styled.Text`
   text-transform: uppercase;
 `;
 
+export const SalesInfo = styled.View`
+  align-self: stretch;
+  border-bottom-width: 1px;
+`;
+
+export const Label = styled.Text`
+  font-size: 20px;
+  color: #24292e;
+  padding: 5px 0;
+`;
+
 export const DeliverymanList = styled.FlatList.attrs({
   showsVerticalScrollIndicator: false,
   numColumns: 2,

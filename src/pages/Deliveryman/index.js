@@ -13,6 +13,8 @@ import {
   Button,
   CommonButton,
   ButtonText,
+  SalesInfo,
+  Label,
   Name,
   Actions,
   ActionButton,
@@ -20,7 +22,7 @@ import {
 
 export default function Deliveryman({navigation}) {
   const [loading, setLoading] = useState(false);
-  const [deliverymen, setDeliverymen] = useState([]);
+  const [data, setData] = useState([]);
 
   const [date, setDate] = useState(new Date());
   const [showDatePicker, setShowDatePicker] = useState(false);
@@ -39,7 +41,7 @@ export default function Deliveryman({navigation}) {
 
     const response = await api.get(`deliverymen/with_filters?day=${day}`);
 
-    setDeliverymen(response.data);
+    setData(response.data);
     setLoading(false);
   }
 
@@ -107,13 +109,18 @@ export default function Deliveryman({navigation}) {
       <Button onPress={() => handleNavigate()}>
         <ButtonText> Adicionar entregador </ButtonText>
       </Button>
+
+      <SalesInfo>
+        <Label> Total pago: R$ {data.sales_amount_total} </Label>
+      </SalesInfo>
+
       {loading ? (
         <ActivityIndicator color="#000" />
       ) : (
         <DeliverymanList
           onRefresh={() => loadDeliverymen()}
           refreshing={loading}
-          data={deliverymen}
+          data={data.deliverymen}
           keyExtractor={(deliveryman) => String(deliveryman.id)}
           renderItem={({item: deliveryman}) => (
             <Card>
