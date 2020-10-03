@@ -5,14 +5,13 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import api from '../../services/api';
 import toast from '../../services/toast';
+import Button from '../../components/Button';
 
 import {
   Container,
   DeliverymanList,
   Card,
-  Button,
   CommonButton,
-  ButtonText,
   SalesInfo,
   Label,
   Name,
@@ -107,7 +106,7 @@ export default function Deliveryman({navigation}) {
       )}
 
       <Button onPress={() => handleNavigate()}>
-        <ButtonText> Adicionar entregador </ButtonText>
+        Adicionar entregador
       </Button>
 
       <SalesInfo>

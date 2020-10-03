@@ -4,14 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import CheckBox from '@react-native-community/checkbox';
 import api from '../../../services/api';
+import Button from '../../../components/Button';
 
 import {
   Container,
   SalesInfo,
   Label,
   ButtonIcon,
-  ActionButton,
-  ActionButtonText,
   SaleList,
   Card,
   Left,
@@ -33,7 +32,9 @@ export default function ShowDeliveryman({navigation}) {
   }, [data]);
 
   async function loadDeliveryman() {
-    const response = await api.get(`deliverymen/${deliveryman.id}/sales?day=${day}`);
+    const response = await api.get(
+      `deliverymen/${deliveryman.id}/sales?day=${day}`,
+    );
 
     setData(response.data);
   }
@@ -45,7 +46,9 @@ export default function ShowDeliveryman({navigation}) {
   function toggleSale(saleId) {
     let newArray = [];
     if (isSaleToPay(saleId)) {
-      newArray = saleIds.filter(function (id) { return id != saleId; });
+      newArray = saleIds.filter(function (id) {
+        return id != saleId;
+      });
     } else {
       newArray = saleIds.concat(saleId);
     }
@@ -90,7 +93,8 @@ export default function ShowDeliveryman({navigation}) {
         <View>
           <SalesInfo>
             <Label>
-              Quanto a pagar: R$ {data.info?.sales_amount} ({data.info?.sales_count})
+              Quanto a pagar: R$ {data.info?.sales_amount} (
+              {data.info?.sales_count})
             </Label>
           </SalesInfo>
 
@@ -100,9 +104,9 @@ export default function ShowDeliveryman({navigation}) {
           </SalesInfo>
 
           <SalesInfo>
-            <ActionButton onPress={() => dialogConfirmBunchUpdate()}>
-              <ActionButtonText> Marcar selecionados como pago </ActionButtonText>
-            </ActionButton>
+            <Button onPress={() => dialogConfirmBunchUpdate()}>
+              Marcar selecionado(s) como pago
+            </Button>
           </SalesInfo>
           <SaleList
             data={data.sales}
@@ -124,11 +128,11 @@ export default function ShowDeliveryman({navigation}) {
                   <ButtonIcon onPress={() => showSale(item)}>
                     <Icon name="info" size={20} color="#333" />
                   </ButtonIcon>
-                  <ActionButton
+                  <Button
                     disabled={item.receiver}
                     onPress={() => handleUpdateReceiver(item.id)}>
-                      <ActionButtonText> Recebi </ActionButtonText>
-                  </ActionButton>
+                    Recebi
+                  </Button>
                 </Right>
                 <CheckBox
                   disabled={item.paid}

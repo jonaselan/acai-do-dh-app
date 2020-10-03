@@ -3,6 +3,7 @@ import {ActivityIndicator, Alert} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
 import {
   Container,
@@ -10,7 +11,6 @@ import {
   Label,
   Info,
   Actions,
-  ActionButton,
   ActionButtonText,
 } from './styles';
 
@@ -84,16 +84,16 @@ export default function ShowExpense({navigation}) {
       )}
 
       <Actions>
-        <ActionButton onPress={() => dialogDelete()}>
+        <Button onPress={() => dialogDelete()}>
           <Icon name="delete" size={11} color="#FFF">
             <ActionButtonText> Apagar </ActionButtonText>
           </Icon>
-        </ActionButton>
-        <ActionButton onPress={() => navigateEdit()}>
+        </Button>
+        <Button onPress={() => navigateEdit()}>
           <Icon name="edit" size={11} color="#FFF">
             <ActionButtonText> Editar </ActionButtonText>
           </Icon>
-        </ActionButton>
+        </Button>
       </Actions>
     </Container>
   );

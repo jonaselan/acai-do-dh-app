@@ -36,23 +36,6 @@ export const ButtonIcon = styled(RectButton)`
   margin-bottom: 10px;
 `;
 
-export const ActionButton = styled(RectButton)`
-  border-radius: 4px;
-  background: #7159c1;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-  padding: 0 10px;
-  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
-`;
-
-export const ActionButtonText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  text-transform: uppercase;
-`;
-
 export const Card = styled.View`
   flex-direction: row;
   padding: 18px 20px;

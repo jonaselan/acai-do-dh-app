@@ -6,23 +6,6 @@ export const Container = styled.SafeAreaView`
   padding: 30px 30px 10px 30px;
 `;
 
-export const Button = styled(RectButton)`
-  margin-top: 10px;
-  align-self: stretch;
-  border-radius: 4px;
-  background: #7159c1;
-  justify-content: center;
-  align-items: center;
-  height: 36px;
-`;
-
-export const ButtonText = styled.Text`
-  font-size: 14px;
-  font-weight: bold;
-  color: #fff;
-  text-transform: uppercase;
-`;
-
 export const SalesInfo = styled.View`
   align-self: stretch;
   border-bottom-width: 1px;

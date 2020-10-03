@@ -1,16 +1,15 @@
 import React, {useState} from 'react';
-import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
 import {
   Container,
   Form,
   Input,
   InputArea,
-  SubmitButton,
   SubmitButtonText,
   LabelInput,
 } from './styles';
@@ -78,15 +77,11 @@ export default function NewExpense({navigation}) {
         />
       </Form>
 
-      <SubmitButton loading={loading} onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator color="#FFF" />
-        ) : (
-          <Icon name="add" size={11} color="#FFF">
-            <SubmitButtonText>Criar</SubmitButtonText>
-          </Icon>
-        )}
-      </SubmitButton>
+      <Button loading={loading} onPress={handleSubmit}>
+        <Icon name="add" size={11} color="#FFF">
+          <SubmitButtonText>Criar</SubmitButtonText>
+        </Icon>
+      </Button>
     </Container>
   );
 }

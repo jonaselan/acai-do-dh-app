@@ -1,13 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Pressable} from 'react-native';
-import api from '../../services/api';
 import moment from 'moment';
 import {withNavigationFocus} from 'react-navigation';
+import api from '../../services/api';
+import Button from '../../components/Button';
 
 import {
   Container,
-  Button,
-  ButtonText,
   ExpenseList,
   ExpensesInfo,
   Label,
@@ -70,7 +69,7 @@ function Expense({navigation, isFocused}) {
   return (
     <Container>
       <Button onPress={() => handleNavigate()}>
-        <ButtonText> Adicionar despesa </ButtonText>
+        Adicionar despesa
       </Button>
       <ExpensesInfo>
         <Label> Total: R$ {data.info?.debit} </Label>

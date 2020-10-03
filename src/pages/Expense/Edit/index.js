@@ -1,15 +1,14 @@
 import React, {useState} from 'react';
-import {ActivityIndicator} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
 import {
   Container,
   Form,
   Input,
-  SubmitButton,
   SubmitButtonText,
   LabelInput,
   InputArea,
@@ -92,15 +91,11 @@ export default function EditExpense({navigation}) {
         />
       </Form>
 
-      <SubmitButton loading={loading} onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator color="#FFF" />
-        ) : (
-          <Icon name="edit" size={11} color="#FFF">
-            <SubmitButtonText>Editar</SubmitButtonText>
-          </Icon>
-        )}
-      </SubmitButton>
+      <Button loading={loading} onPress={handleSubmit}>
+        <Icon name="edit" size={11} color="#FFF">
+          <SubmitButtonText>Editar</SubmitButtonText>
+        </Icon>
+      </Button>
     </Container>
   );
 }

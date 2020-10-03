@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
-import {ActivityIndicator} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
-import {
-  Container,
-  Form,
-  Input,
-  SubmitButton,
-  SubmitButtonText,
-  LabelInput,
-} from './styles';
+import {Container, Form, Input, SubmitButtonText, LabelInput} from './styles';
 
 export default function EditDeliveryman({navigation}) {
   const deliveryman = navigation.getParam('deliveryman');
@@ -44,15 +37,11 @@ export default function EditDeliveryman({navigation}) {
         />
       </Form>
 
-      <SubmitButton loading={loading} onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator color="#FFF" />
-        ) : (
-          <Icon name="edit" size={11} color="#FFF">
-            <SubmitButtonText>Editar</SubmitButtonText>
-          </Icon>
-        )}
-      </SubmitButton>
+      <Button loading={loading} onPress={handleSubmit}>
+        <Icon name="edit" size={11} color="#FFF">
+          <SubmitButtonText>Editar</SubmitButtonText>
+        </Icon>
+      </Button>
     </Container>
   );
 }
