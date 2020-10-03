@@ -153,7 +153,7 @@ function Sale({navigation, isFocused}) {
                           </DeliveryMethod>
                           <DeliveryMethod>
                             <Icon name="motorcycle" size={14} color="#333" />
-                            {item.deliveryman.name}
+                            {item.deliveryman?.name}
                           </DeliveryMethod>
                         </View>
                       ) : (
