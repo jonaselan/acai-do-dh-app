@@ -5,15 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
-import {
-  Container,
-  Form,
-  Input,
-  SubmitButton,
-  SubmitButtonText,
-  LabelInput,
-} from './styles';
+import {Container, Form, Input, SubmitButtonText, LabelInput} from './styles';
 
 export default function EditSale({navigation}) {
   const sale = navigation.getParam('sale');
@@ -154,7 +148,7 @@ export default function EditSale({navigation}) {
         )}
       </Form>
 
-      <SubmitButton loading={loading} onPress={handleSubmit}>
+      <Button loading={loading} onPress={handleSubmit}>
         {loading ? (
           <ActivityIndicator color="#FFF" />
         ) : (
@@ -162,7 +156,7 @@ export default function EditSale({navigation}) {
             <SubmitButtonText>Editar</SubmitButtonText>
           </Icon>
         )}
-      </SubmitButton>
+      </Button>
     </Container>
   );
 }

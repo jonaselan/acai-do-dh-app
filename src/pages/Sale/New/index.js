@@ -5,15 +5,9 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
+import Button from '../../../components/Button';
 
-import {
-  Container,
-  Form,
-  Input,
-  SubmitButton,
-  SubmitButtonText,
-  LabelInput,
-} from './styles';
+import {Container, Form, Input, SubmitButtonText, LabelInput} from './styles';
 
 export default function NewSale({navigation}) {
   const [loading, setLoading] = useState(false);
@@ -25,8 +19,6 @@ export default function NewSale({navigation}) {
   const [deliveryman, setDeliveryman] = useState('');
 
   const [deliverymen, setDeliverymen] = useState(null);
-
-  // TODO: Validar campo de valor da venda
 
   const payment_methods = [
     {label: 'Dinheiro', value: 0},
@@ -151,15 +143,11 @@ export default function NewSale({navigation}) {
         )}
       </Form>
 
-      <SubmitButton loading={loading} onPress={handleSubmit}>
-        {loading ? (
-          <ActivityIndicator color="#FFF" />
-        ) : (
-          <Icon name="add" size={11} color="#FFF">
-            <SubmitButtonText>Criar</SubmitButtonText>
-          </Icon>
-        )}
-      </SubmitButton>
+      <Button loading={loading} onPress={handleSubmit}>
+        <Icon name="add" size={11} color="#FFF">
+          <SubmitButtonText>Criar</SubmitButtonText>
+        </Icon>
+      </Button>
     </Container>
   );
 }

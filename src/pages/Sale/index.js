@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import {Picker} from '@react-native-community/picker';
 import {withNavigationFocus} from 'react-navigation';
+import Button from '../../components/Button';
 
 import {
   Container,
@@ -13,8 +14,6 @@ import {
   Label,
   Filters,
   CommonButton,
-  Button,
-  ButtonText,
   SaleList,
   Card,
   Left,
@@ -114,7 +113,7 @@ function Sale({navigation, isFocused}) {
       </Filters>
 
       <Button onPress={() => handleNavigate()}>
-        <ButtonText> Adicionar venda </ButtonText>
+        Adicionar venda
       </Button>
       <SalesInfo>
         <Label> Total: R$ {data.info?.credit} </Label>
