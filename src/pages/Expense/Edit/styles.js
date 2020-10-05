@@ -14,6 +14,8 @@ export const Form = styled.View`
   border-bottom-width: 1px;
 `;
 
+export const CommonButton = styled.Button``;
+
 export const Input = styled.TextInput.attrs({
   placeholderTextColor: '#999',
 })`

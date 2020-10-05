@@ -1,6 +1,4 @@
 import styled from 'styled-components';
-// NOTE: usar essa lib para gerar botões adaptaveis para ambas as plataformas
-import {RectButton} from 'react-native-gesture-handler';
 
 export const Container = styled.View`
   flex: 1;

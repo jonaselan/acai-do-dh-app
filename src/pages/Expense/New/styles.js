@@ -8,6 +8,8 @@ export const Container = styled.ScrollView.attrs({
   padding: 0 20px;
 `;
 
+export const CommonButton = styled.Button``;
+
 export const Form = styled.View`
   align-self: stretch;
   margin-top: 50px;
