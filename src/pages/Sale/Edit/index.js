@@ -6,6 +6,8 @@ import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
 import Button from '../../../components/Button';
+import Datepicker from '../../../components/Datepicker';
+import moment from 'moment';
 
 import {Container, Form, Input, SubmitButtonText, LabelInput} from './styles';
 
@@ -16,6 +18,7 @@ export default function EditSale({navigation}) {
   const [value, setValue] = useState(sale.value);
   const [deliveryFee, setDeliveryFee] = useState(sale.delivery_fee);
   const [deliveryman, setDeliveryman] = useState(sale.deliveryman_id);
+  const [createdAt, setcreatedAt] = useState(sale.created_at);
   const [paymentMethod, setPaymentMethod] = useState(
     sale.payment_method == 'cash' ? 0 : 1,
   );
@@ -52,6 +55,7 @@ export default function EditSale({navigation}) {
       charge: charge,
       delivery_fee: deliveryMethod ? 0 : deliveryFee,
       deliveryman_id: deliveryMethod ? null : deliveryman,
+      created_at: moment(createdAt).add(3, 'hours').format('YYYY-MM-DD HH:mm:ss'),
     });
 
     setLoading(false);
@@ -109,6 +113,9 @@ export default function EditSale({navigation}) {
             setDeliveryMethod(value);
           }}
         />
+
+        <LabelInput>Data</LabelInput>
+        <Datepicker date={createdAt} onChange={setcreatedAt} />
 
         {sale.delivery_method == 'in_store' ? (
           <View />

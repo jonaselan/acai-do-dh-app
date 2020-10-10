@@ -6,6 +6,8 @@ import {Picker} from '@react-native-community/picker';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
 import Button from '../../../components/Button';
+import Datepicker from '../../../components/Datepicker';
+import moment from 'moment';
 
 import {Container, Form, Input, SubmitButtonText, LabelInput} from './styles';
 
@@ -17,7 +19,7 @@ export default function NewSale({navigation}) {
   const [paymentMethod, setPaymentMethod] = useState(0);
   const [deliveryMethod, setDeliveryMethod] = useState(0);
   const [deliveryman, setDeliveryman] = useState('');
-
+  const [createdAt, setcreatedAt] = useState(new Date());
   const [deliverymen, setDeliverymen] = useState(null);
 
   const payment_methods = [
@@ -49,6 +51,7 @@ export default function NewSale({navigation}) {
       charge: charge,
       delivery_fee: deliveryMethod ? 0 : deliveryFee,
       deliveryman_id: deliveryMethod ? null : deliveryman,
+      created_at: moment(createdAt).add(3, 'hours').format('YYYY-MM-DD HH:mm:ss'),
     });
 
     setLoading(false);
@@ -105,6 +108,9 @@ export default function NewSale({navigation}) {
             setDeliveryMethod(value);
           }}
         />
+
+        <LabelInput>Data</LabelInput>
+        <Datepicker date={createdAt} onChange={setcreatedAt} />
 
         {deliveryMethod ? (
           <View />
