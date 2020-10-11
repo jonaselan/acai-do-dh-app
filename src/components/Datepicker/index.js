@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Button, View} from 'react-native';
-// import {Container, Text} from './styles';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 

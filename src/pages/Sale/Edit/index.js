@@ -18,7 +18,7 @@ export default function EditSale({navigation}) {
   const [value, setValue] = useState(sale.value);
   const [deliveryFee, setDeliveryFee] = useState(sale.delivery_fee);
   const [deliveryman, setDeliveryman] = useState(sale.deliveryman_id);
-  const [createdAt, setcreatedAt] = useState(sale.created_at);
+  const [createdAt, setcreatedAt] = useState(new Date(sale.created_at));
   const [paymentMethod, setPaymentMethod] = useState(
     sale.payment_method == 'cash' ? 0 : 1,
   );

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import RadioForm from 'react-native-simple-radio-button';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import Datepicker from '../../../components/Datepicker';
 import api from '../../../services/api';
 import toast from '../../../services/toast';
 import Button from '../../../components/Button';
@@ -11,7 +11,6 @@ import {
   Container,
   Form,
   Input,
-  CommonButton,
   InputArea,
   SubmitButtonText,
   LabelInput,
@@ -23,7 +22,6 @@ export default function NewExpense({navigation}) {
   const [value, setValue] = useState('');
   const [description, setDescription] = useState('');
   const [createdAt, setcreatedAt] = useState(new Date());
-  const [showDatePicker, setShowDatePicker] = useState(false);
 
   const kindOptions = [
     {label: 'Açai', value: 0},
@@ -49,17 +47,6 @@ export default function NewExpense({navigation}) {
     navigation.navigate('Expense');
   }
 
-  const onChangeDate = (event, selectedDate) => {
-    const currentDate = selectedDate || createdAt;
-
-    setShowDatePicker(false);
-    setcreatedAt(currentDate);
-  };
-
-  const showDatepicker = () => {
-    setShowDatePicker(true);
-  };
-
   return (
     <Container>
       <Form>
@@ -83,21 +70,8 @@ export default function NewExpense({navigation}) {
           }}
         />
 
-        {showDatePicker && (
-          <DateTimePicker
-            testID="dateTimePicker"
-            value={createdAt}
-            mode={'date'}
-            is24Hour={true}
-            display="default"
-            onChange={onChangeDate}
-          />
-        )}
         <LabelInput>Data</LabelInput>
-        <CommonButton
-          onPress={showDatepicker}
-          title={moment(createdAt).format('DD-MM-YYYY')}
-        />
+        <Datepicker date={createdAt} onChange={setcreatedAt} />
 
         <LabelInput>Descrição</LabelInput>
         <InputArea
