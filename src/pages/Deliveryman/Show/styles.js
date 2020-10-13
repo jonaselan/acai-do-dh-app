@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import {RectButton} from 'react-native-gesture-handler';
+import ButtonComponent from '../../../components/Button';
 
 export const Container = styled.View`
   flex: 1;
@@ -28,6 +29,10 @@ export const SaleList = styled.FlatList.attrs({
 })`
   margin-top: 20px;
   margin-bottom: 130px;
+`;
+
+export const Button = styled(ButtonComponent)`
+  opacity: ${(props) => (props.disabled ? 0.7 : 1)};
 `;
 
 export const ButtonIcon = styled(RectButton)`

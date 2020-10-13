@@ -4,12 +4,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import CheckBox from '@react-native-community/checkbox';
 import api from '../../../services/api';
-import Button from '../../../components/Button';
 
 import {
   Container,
   SalesInfo,
   Label,
+  Button,
   ButtonIcon,
   SaleList,
   Card,
@@ -29,7 +29,7 @@ export default function ShowDeliveryman({navigation}) {
 
   useEffect(() => {
     loadDeliveryman();
-  }, [data]);
+  }, []);
 
   async function loadDeliveryman() {
     const response = await api.get(
