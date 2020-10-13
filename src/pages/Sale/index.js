@@ -116,6 +116,8 @@ function Sale({navigation, isFocused}) {
         Adicionar venda
       </Button>
       <SalesInfo>
+        {/* credit -> sub_total */}
+        {/* total */}
         <Label> Total: R$ {data.info?.credit} </Label>
         <Label> Total de vendas: {data.info?.quantity} </Label>
       </SalesInfo>
