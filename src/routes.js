@@ -69,7 +69,18 @@ const Routes = createAppContainer(
           },
         ),
       },
-      Statistic,
+      Statistic: {
+        screen: createStackNavigator(
+          {
+            Statistic,
+          },
+          {
+            navigationOptions: {
+              tabBarLabel: 'Estatisticas',
+            },
+          },
+        ),
+      },
     },
     {
       defaultNavigationOptions: ({navigation}) => ({

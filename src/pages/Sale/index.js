@@ -98,27 +98,26 @@ function Sale({navigation, isFocused}) {
 
       <Filters>
         <Left>
-          <CommonButton onPress={showDatepicker} title={moment(date).format('DD-MM-YYYY')} />
+          <CommonButton
+            onPress={showDatepicker}
+            title={moment(date).format('DD-MM-YYYY')}
+          />
         </Left>
         <Right>
           <Picker
             selectedValue={paymentMethod}
             style={{height: 50, width: 150}}
             onValueChange={(itemValue) => setPaymentMethod(itemValue)}>
-              <Picker.Item label='Nenhum' value='' />
-              <Picker.Item label='Dinheiro' value='cash' />
-              <Picker.Item label='Cartão de Crédito' value='credit_card' />
+            <Picker.Item label="Nenhum" value="" />
+            <Picker.Item label="Dinheiro" value="cash" />
+            <Picker.Item label="Cartão de Crédito" value="credit_card" />
           </Picker>
         </Right>
       </Filters>
 
-      <Button onPress={() => handleNavigate()}>
-        Adicionar venda
-      </Button>
+      <Button onPress={() => handleNavigate()}> Adicionar venda </Button>
       <SalesInfo>
-        {/* credit -> sub_total */}
-        {/* total */}
-        <Label> Total: R$ {data.info?.credit} </Label>
+        <Label> Total: R$ {data.info?.credit} ({data.info?.sub_total})</Label>
         <Label> Total de vendas: {data.info?.quantity} </Label>
       </SalesInfo>
 
