@@ -4,6 +4,7 @@ import moment from 'moment';
 import {withNavigationFocus} from 'react-navigation';
 import api from '../../services/api';
 import Button from '../../components/Button';
+import Datepicker from '../../components/Datepicker';
 
 import {
   Container,
@@ -23,6 +24,7 @@ function Expense({navigation, isFocused}) {
   const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
   const [perPage, setPerPage] = useState(8);
+  const [date, setDate] = useState(new Date());
   const kinds = {
     acai: 'Açai',
     complement: 'Complementos do açai',
@@ -39,11 +41,13 @@ function Expense({navigation, isFocused}) {
     if (isFocused) {
       loadExpenses();
     }
-  }, [isFocused]);
+  }, [isFocused, date]);
 
   async function loadExpenses() {
     setLoading(true);
-    const response = await api.get('expenses');
+    const day = moment(date).format('YYYY-MM-DD');
+
+    const response = await api.get(`expenses?day=${day}`);
 
     setData(response.data);
     setLoading(false);
@@ -53,7 +57,7 @@ function Expense({navigation, isFocused}) {
     const newPage = page + 1;
 
     const response = await api.get(
-      `expenses?page=${newPage}&per_page=${perPage}`,
+      `expenses?page=${newPage}&per_page=${perPage}`
     );
 
     if (response.data.length > 0) {
@@ -68,9 +72,9 @@ function Expense({navigation, isFocused}) {
 
   return (
     <Container>
-      <Button onPress={() => handleNavigate()}>
-        Adicionar despesa
-      </Button>
+      <Datepicker date={date} onChange={setDate} />
+
+      <Button onPress={() => handleNavigate()}> Adicionar despesa </Button>
       <ExpensesInfo>
         <Label> Total: R$ {data.info?.debit} </Label>
         {/* <Label> Total de vendas: {data.info?.quantity} </Label> */}

@@ -64,12 +64,14 @@ export default function ShowDeliveryman({navigation}) {
     await api.put('sales/bunch_update', {
       ids: saleIds,
     });
+    loadDeliveryman();
   }
 
   async function handleUpdateReceiver(saleId) {
     await api.put(`sales/${saleId}`, {
       receiver: true,
     });
+    loadDeliveryman();
   }
 
   const dialogConfirmBunchUpdate = () =>

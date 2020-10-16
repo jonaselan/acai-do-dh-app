@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {ActivityIndicator, Pressable, View, Text} from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import api from '../../services/api';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import moment from 'moment';
 import {Picker} from '@react-native-community/picker';
 import {withNavigationFocus} from 'react-navigation';
 import Button from '../../components/Button';
+import Datepicker from '../../components/Datepicker';
 
 import {
   Container,
@@ -72,36 +72,11 @@ function Sale({navigation, isFocused}) {
     navigation.navigate('ShowSale', {sale});
   }
 
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-
-    setDate(currentDate);
-    setShowDatePicker(false);
-  };
-
-  const showDatepicker = () => {
-    setShowDatePicker(true);
-  };
-
   return (
     <Container>
-      {showDatePicker && (
-        <DateTimePicker
-          testID="dateTimePicker"
-          value={date}
-          mode={'date'}
-          is24Hour={true}
-          display="default"
-          onChange={onChange}
-        />
-      )}
-
       <Filters>
         <Left>
-          <CommonButton
-            onPress={showDatepicker}
-            title={moment(date).format('DD-MM-YYYY')}
-          />
+          <Datepicker date={date} onChange={setDate} />
         </Left>
         <Right>
           <Picker
