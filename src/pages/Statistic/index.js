@@ -20,6 +20,7 @@ function Statistic() {
   const [month, setMonth] = useState(new Date().getMonth() + 1);
   const [year, setYear] = useState(new Date().getFullYear());
   const [data, setData] = useState([]);
+  const [total, setTotal] = useState(0);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -32,6 +33,9 @@ function Statistic() {
 
     const response = await api.get(`statistics?date=${date}`);
 
+    setTotal(Math.round(
+      parseFloat(response.data.sales.total + response.data.expenses.total)
+    ))
     setData(response.data);
     setLoading(false);
   }
@@ -81,12 +85,14 @@ function Statistic() {
           <Header> Despesas </Header>
 
           <Label> Entregas: R$ {data.expenses?.deliveries_fee} </Label>
-          <Label> Açai: R$ {data.expenses?.acai} </Label>
+          <Label> Açaí: R$ {data.expenses?.acai} </Label>
           <Label> Complementos: R$ {data.expenses?.complement} </Label>
           <Label> Entregadores: R$ {data.expenses?.employees} </Label>
           <Label> Funcionários: R$ {data.expenses?.deliveryman} </Label>
           <Label> Outros: R$ {data.expenses?.others} </Label>
           <Label> Total: R$ {data.expenses?.total} </Label>
+
+          <Value> R$ {total} </Value>
         </Infos>
       )}
     </Container>

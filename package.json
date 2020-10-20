@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-community/checkbox": "^0.5.3",
     "@react-native-community/datetimepicker": "^3.0.2",
+    "@react-native-community/netinfo": "^5.9.7",
     "@react-native-community/picker": "^1.6.5",
     "axios": "^0.19.2",
     "moment": "^2.27.0",

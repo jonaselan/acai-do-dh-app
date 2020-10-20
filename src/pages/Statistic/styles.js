@@ -33,8 +33,8 @@ export const Left = styled.View`
 
 export const Value = styled.Text`
   font-weight: bold;
-  font-size: 26px;
-  padding-top: 5px;
+  font-size: 40px;
+  padding-top: 15px;
   color: #333;
 `;
 

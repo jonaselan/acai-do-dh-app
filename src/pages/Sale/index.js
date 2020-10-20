@@ -13,7 +13,6 @@ import {
   SalesInfo,
   Label,
   Filters,
-  CommonButton,
   SaleList,
   Card,
   Left,
